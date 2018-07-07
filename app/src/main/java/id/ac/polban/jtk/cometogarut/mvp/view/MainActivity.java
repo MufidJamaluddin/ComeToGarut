@@ -2,10 +2,9 @@ package id.ac.polban.jtk.cometogarut.mvp.view;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
-
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -20,6 +19,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.pnikosis.materialishprogress.ProgressWheel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import id.ac.polban.jtk.cometogarut.R;
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements SearchPlaceContra
 
         this.progressWheel = findViewById(R.id.progress_wheel);
 
-        this.searchPlaceAdapter = new SearchPlaceAdapter(this.presenter.getPlaces());
+        this.searchPlaceAdapter = new SearchPlaceAdapter();
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -62,8 +62,9 @@ public class MainActivity extends AppCompatActivity implements SearchPlaceContra
     }
 
     @Override
-    public void showResults()
+    public void showResults(List<SimplePlace> list)
     {
+        this.searchPlaceAdapter.setList(list);
         this.searchPlaceAdapter.notifyDataSetChanged();
     }
 
@@ -161,9 +162,15 @@ public class MainActivity extends AppCompatActivity implements SearchPlaceContra
     {
         private List<SimplePlace> list;
 
-        SearchPlaceAdapter(List<SimplePlace> list)
+        SearchPlaceAdapter()
         {
-            this.list = list;
+            this.list = new ArrayList();
+        }
+
+        public void setList(List<SimplePlace> list)
+        {
+            this.list.clear();
+            this.list.addAll(list);
         }
 
         @NonNull

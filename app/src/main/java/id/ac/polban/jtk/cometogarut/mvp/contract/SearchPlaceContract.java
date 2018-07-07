@@ -35,7 +35,7 @@ public interface SearchPlaceContract
         /**
          * Menampilkan Hasil Pencarian
          */
-        void showResults();
+        void showResults(List<SimplePlace> list);
 
     }
 
@@ -52,10 +52,5 @@ public interface SearchPlaceContract
          */
         void getAll();
 
-        /**
-         *
-         * @return hasil pencarian
-         */
-        List<SimplePlace> getPlaces();
     }
 }

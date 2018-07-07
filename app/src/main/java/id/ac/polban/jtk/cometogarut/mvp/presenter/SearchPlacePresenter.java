@@ -1,8 +1,8 @@
 package id.ac.polban.jtk.cometogarut.mvp.presenter;
 
 import android.text.TextUtils;
+import android.util.Log;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import id.ac.polban.jtk.cometogarut.mvp.application.CgApplication;
@@ -18,8 +18,6 @@ import io.reactivex.schedulers.Schedulers;
 
 public class SearchPlacePresenter extends BasePresenter<SearchPlaceContract.View> implements SearchPlaceContract.Presenter
 {
-    // Hasil Pencarian
-    private List<SimplePlace> places;
     // Koleksi untuk Unsubscribe
     private CompositeDisposable compositeDisposable;
 
@@ -28,8 +26,8 @@ public class SearchPlacePresenter extends BasePresenter<SearchPlaceContract.View
      */
     public SearchPlacePresenter()
     {
-        this.places = new ArrayList<>();
         this.compositeDisposable = new CompositeDisposable();
+        Log.d("SearchPlacePresenter", "Load Presenter...");
     }
 
     /**
@@ -39,6 +37,7 @@ public class SearchPlacePresenter extends BasePresenter<SearchPlaceContract.View
     @Override
     public void startSearch(String searchKey)
     {
+        Log.d("SearchPlacePresenter", "StartSearch...");
         // loading..
         this.view.showLoading();
 
@@ -51,6 +50,8 @@ public class SearchPlacePresenter extends BasePresenter<SearchPlaceContract.View
         }
 
         this.view.hideLoading();
+
+        Log.d("SearchPlacePresenter", "EndSearch...");
     }
 
     /**
@@ -82,20 +83,21 @@ public class SearchPlacePresenter extends BasePresenter<SearchPlaceContract.View
             @Override
             public void onNext(List<SimplePlace> list)
             {
-                places.clear();
-                places.addAll(list);
+                view.showResults(list);
+                Log.d("SearchPlacePresenter", "Add All Data : onNext...");
             }
 
             @Override
             public void onError(Throwable e)
             {
                 view.showError(e.getMessage());
+                Log.d("SearchPlacePresenter", e.getMessage());
             }
 
             @Override
             public void onComplete()
             {
-
+                Log.d("SearchPlacePresenter", "Search Completed...");
             }
         });
     }
@@ -107,16 +109,7 @@ public class SearchPlacePresenter extends BasePresenter<SearchPlaceContract.View
     public void detach()
     {
         this.compositeDisposable.clear();
-        this.places = null;
-    }
-
-    /**
-     * Mendapatkan List Hasil Pencarian
-     * @return hasil pencarian
-     */
-    public List<SimplePlace> getPlaces()
-    {
-        return places;
+        Log.d("SearchPlacePresenter", "Detach...");
     }
 
 }
