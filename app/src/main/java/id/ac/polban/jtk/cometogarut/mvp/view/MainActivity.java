@@ -2,20 +2,20 @@ package id.ac.polban.jtk.cometogarut.mvp.view;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
-import android.app.SearchManager;
-import android.content.Intent;
+
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.pnikosis.materialishprogress.ProgressWheel;
@@ -27,12 +27,10 @@ import id.ac.polban.jtk.cometogarut.mvp.contract.SearchPlaceContract;
 import id.ac.polban.jtk.cometogarut.mvp.model.SimplePlace;
 import id.ac.polban.jtk.cometogarut.mvp.presenter.SearchPlacePresenter;
 
-public class MainActivity extends AppCompatActivity implements SearchPlaceContract.View, SwipeRefreshLayout.OnRefreshListener
+public class MainActivity extends AppCompatActivity implements SearchPlaceContract.View, SearchView.OnQueryTextListener
 {
     private SearchPlacePresenter presenter;
-    private String searchKey;
     private ProgressWheel progressWheel;
-    private SwipeRefreshLayout swipeRefreshLayout;
     private SearchPlaceAdapter searchPlaceAdapter;
 
     @Override
@@ -45,16 +43,15 @@ public class MainActivity extends AppCompatActivity implements SearchPlaceContra
         this.presenter.attach(this);
 
         this.progressWheel = findViewById(R.id.progress_wheel);
-        this.swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
-        this.swipeRefreshLayout.setOnRefreshListener(this);
-
-        Intent intent = getIntent();
-        if(Intent.ACTION_SEARCH.equals(intent.getAction()))
-        {
-            this.searchKey = intent.getStringExtra(SearchManager.QUERY);
-        }
 
         this.searchPlaceAdapter = new SearchPlaceAdapter(this.presenter.getPlaces());
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+
+        RecyclerView recycleView = findViewById(R.id.recyclerView);
+        recycleView.setLayoutManager(layoutManager);
+        recycleView.setAdapter(this.searchPlaceAdapter);
     }
 
     @Override
@@ -78,7 +75,6 @@ public class MainActivity extends AppCompatActivity implements SearchPlaceContra
     public void showLoading()
     {
         this.progressWheel.setVisibility(View.VISIBLE);
-        this.swipeRefreshLayout.setVisibility(View.GONE);
         // use objectAnimator let progress from InVisible to Visible
         ValueAnimator progressFadeInAnim = ObjectAnimator.ofFloat(progressWheel, "alpha", 0, 1, 1);
         progressFadeInAnim.start();
@@ -91,8 +87,6 @@ public class MainActivity extends AppCompatActivity implements SearchPlaceContra
     public void hideLoading()
     {
         progressWheel.setVisibility(View.GONE);
-        swipeRefreshLayout.setVisibility(View.VISIBLE);
-        swipeRefreshLayout.setRefreshing(false); // close refresh animator
 
         ValueAnimator progressFadeInAnim = ObjectAnimator.ofFloat(progressWheel, "alpha", 1, 0, 0);
         progressFadeInAnim.start();
@@ -106,17 +100,42 @@ public class MainActivity extends AppCompatActivity implements SearchPlaceContra
     @Override
     public void showError(String message)
     {
-        // use snackbar to replace Toast to show Error message
-        Snackbar.make(swipeRefreshLayout, message, Snackbar.LENGTH_LONG).show();
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     /**
-     * Called when a swipe gesture triggers a refresh.
+     * Called when the user submits the query. This could be due to a key press on the
+     * keyboard or due to pressing a submit button.
+     * The listener can override the standard behavior by returning true
+     * to indicate that it has handled the submit request. Otherwise return false to
+     * let the SearchView handle the submission by launching any associated intent.
+     *
+     * @param query the query text that is to be submitted
+     * @return true if the query has been handled by the listener, false to let the
+     * SearchView perform the default action.
      */
     @Override
-    public void onRefresh()
+    public boolean onQueryTextSubmit(String query)
     {
-        this.presenter.startSearch(this.searchKey);
+        this.presenter.startSearch(query);
+        return true;
+    }
+
+    /**
+     * Called when the query text is changed by the user.
+     *
+     * @param newText the new content of the query text field.
+     * @return false if the SearchView should perform the default action of showing any
+     * suggestions if available, true if the action was handled by the listener.
+     */
+    @Override
+    public boolean onQueryTextChange(String newText)
+    {
+        if(newText.length() > 3)
+        {
+            this.presenter.startSearch(newText);
+        }
+        return true;
     }
 
     /**

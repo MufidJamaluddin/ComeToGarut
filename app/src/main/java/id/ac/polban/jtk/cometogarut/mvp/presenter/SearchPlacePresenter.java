@@ -1,6 +1,5 @@
 package id.ac.polban.jtk.cometogarut.mvp.presenter;
 
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import java.util.ArrayList;
@@ -10,14 +9,19 @@ import id.ac.polban.jtk.cometogarut.mvp.application.CgApplication;
 import id.ac.polban.jtk.cometogarut.mvp.contract.SearchPlaceContract;
 import id.ac.polban.jtk.cometogarut.mvp.model.SimplePlace;
 import id.ac.polban.jtk.cometogarut.mvp.network.NetworkService;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class SearchPlacePresenter extends BasePresenter<SearchPlaceContract.View> implements SearchPlaceContract.Presenter
 {
     // Hasil Pencarian
     private List<SimplePlace> places;
+    // Koleksi untuk Unsubscribe
+    private CompositeDisposable compositeDisposable;
 
     /**
      * Konstruktor
@@ -25,6 +29,7 @@ public class SearchPlacePresenter extends BasePresenter<SearchPlaceContract.View
     public SearchPlacePresenter()
     {
         this.places = new ArrayList<>();
+        this.compositeDisposable = new CompositeDisposable();
     }
 
     /**
@@ -41,35 +46,10 @@ public class SearchPlacePresenter extends BasePresenter<SearchPlaceContract.View
             this.getAll();
         else {
             NetworkService restservice = ((CgApplication) this.view.getApplication()).getNetworkService();
-            restservice.getAPI().getPlaces().enqueue(new Callback<List<SimplePlace>>() {
-
-                @Override
-                public void onResponse(@NonNull Call<List<SimplePlace>> call, @NonNull Response<List<SimplePlace>> response)
-                {
-                    if(response.isSuccessful())
-                    {
-                        getPlaces().clear();
-                        List<SimplePlace> list = response.body();
-                        if(list != null) getPlaces().addAll(list);
-                    }
-                    else
-                    {
-                        view.showError("Not Found!");
-                    }
-                }
-
-                @Override
-                public void onFailure(@NonNull Call<List<SimplePlace>> call, @NonNull Throwable t)
-                {
-                    view.showError(t.getMessage());
-                }
-            });
+            Observable<List<SimplePlace>> fplaces = restservice.getAPI().getPlaces(searchKey);
+            this.mergeData(fplaces);
         }
 
-        // Tampilkan Hasil
-        this.view.showResults();
-
-        // Tutup Loading
         this.view.hideLoading();
     }
 
@@ -80,25 +60,44 @@ public class SearchPlacePresenter extends BasePresenter<SearchPlaceContract.View
     public void getAll()
     {
         NetworkService restservice = ((CgApplication) this.view.getApplication()).getNetworkService();
-        restservice.getAPI().getPlaces().enqueue(new Callback<List<SimplePlace>>() {
+        Observable<List<SimplePlace>> fplaces = restservice.getAPI().getPlaces();
+        this.mergeData(fplaces);
+    }
+
+    /**
+     *
+     * @param fplaces : Flowable
+     */
+    private void mergeData(Observable<List<SimplePlace>> fplaces)
+    {
+        Observable<List<SimplePlace>> observable = fplaces.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        observable.subscribe(new Observer<List<SimplePlace>>()
+        {
             @Override
-            public void onResponse(@NonNull Call<List<SimplePlace>> call, @NonNull Response<List<SimplePlace>> response)
+            public void onSubscribe(Disposable d)
             {
-                if(response.isSuccessful())
-                {
-                    List<SimplePlace> list = response.body();
-                    getPlaces().clear();
-                    if(list != null)  getPlaces().addAll(list);
-                }
+                compositeDisposable.add(d);
             }
 
             @Override
-            public void onFailure(@NonNull Call<List<SimplePlace>> call, @NonNull Throwable t)
+            public void onNext(List<SimplePlace> list)
             {
-                view.showError(t.getMessage());
+                places.clear();
+                places.addAll(list);
+            }
+
+            @Override
+            public void onError(Throwable e)
+            {
+                view.showError(e.getMessage());
+            }
+
+            @Override
+            public void onComplete()
+            {
+
             }
         });
-
     }
 
     /**
@@ -107,6 +106,7 @@ public class SearchPlacePresenter extends BasePresenter<SearchPlaceContract.View
     @Override
     public void detach()
     {
+        this.compositeDisposable.clear();
         this.places = null;
     }
 
@@ -118,4 +118,5 @@ public class SearchPlacePresenter extends BasePresenter<SearchPlaceContract.View
     {
         return places;
     }
+
 }
