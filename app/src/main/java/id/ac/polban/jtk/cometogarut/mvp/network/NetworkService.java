@@ -1,7 +1,5 @@
 package id.ac.polban.jtk.cometogarut.mvp.network;
 
-import java.util.concurrent.Executors;
-
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;

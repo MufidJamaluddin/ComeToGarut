@@ -18,7 +18,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class SearchPlacePresenter extends BasePresenter<SearchPlaceContract.View> implements SearchPlaceContract.Presenter
 {
-    // Koleksi untuk Unsubscribe
+    // Koleksi untuk Unsubscribe // kill
     private CompositeDisposable compositeDisposable;
 
     /**
@@ -38,18 +38,19 @@ public class SearchPlacePresenter extends BasePresenter<SearchPlaceContract.View
     public void startSearch(String searchKey)
     {
         Log.d("SearchPlacePresenter", "StartSearch...");
-        // loading..
-        this.view.showLoading();
 
         if(TextUtils.isEmpty(searchKey))
             this.getAll();
         else {
+            // loading..
+            this.view.showLoading();
+
             NetworkService restservice = ((CgApplication) this.view.getApplication()).getNetworkService();
             Observable<List<SimplePlace>> fplaces = restservice.getAPI().getPlaces(searchKey);
             this.mergeData(fplaces);
-        }
 
-        this.view.hideLoading();
+            this.view.hideLoading();
+        }
 
         Log.d("SearchPlacePresenter", "EndSearch...");
     }
@@ -60,9 +61,13 @@ public class SearchPlacePresenter extends BasePresenter<SearchPlaceContract.View
     @Override
     public void getAll()
     {
+        this.view.showLoading();
+
         NetworkService restservice = ((CgApplication) this.view.getApplication()).getNetworkService();
         Observable<List<SimplePlace>> fplaces = restservice.getAPI().getPlaces();
         this.mergeData(fplaces);
+
+        this.view.hideLoading();
     }
 
     /**
@@ -72,6 +77,7 @@ public class SearchPlacePresenter extends BasePresenter<SearchPlaceContract.View
     private void mergeData(Observable<List<SimplePlace>> fplaces)
     {
         Observable<List<SimplePlace>> observable = fplaces.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+
         observable.subscribe(new Observer<List<SimplePlace>>()
         {
             @Override
@@ -92,6 +98,7 @@ public class SearchPlacePresenter extends BasePresenter<SearchPlaceContract.View
             {
                 view.showError(e.getMessage());
                 Log.d("SearchPlacePresenter", e.getMessage());
+                e.printStackTrace();
             }
 
             @Override

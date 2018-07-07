@@ -4,12 +4,15 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -29,10 +32,17 @@ import id.ac.polban.jtk.cometogarut.mvp.presenter.SearchPlacePresenter;
 
 public class MainActivity extends AppCompatActivity implements SearchPlaceContract.View, SearchView.OnQueryTextListener
 {
+    // Presenter yang berhubungan dengan View ini
     private SearchPlacePresenter presenter;
+    // Progress....
     private ProgressWheel progressWheel;
+    // Adapter RecycleView dg List CardView
     private SearchPlaceAdapter searchPlaceAdapter;
 
+    /**
+     *
+     * @param savedInstanceState : instance state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -52,8 +62,29 @@ public class MainActivity extends AppCompatActivity implements SearchPlaceContra
         RecyclerView recycleView = findViewById(R.id.recyclerView);
         recycleView.setLayoutManager(layoutManager);
         recycleView.setAdapter(this.searchPlaceAdapter);
+
+        // Initialize
+        this.presenter.getAll();
     }
 
+    /**
+     *
+     * @param menu : menu toolbar
+     * @return
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.search, menu);
+        MenuItem menuItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
+        searchView.setOnQueryTextListener(this);
+        return true;
+    }
+
+    /**
+     * Kill Objek ini
+     */
     @Override
     protected void onDestroy()
     {
@@ -61,6 +92,10 @@ public class MainActivity extends AppCompatActivity implements SearchPlaceContra
         super.onDestroy();
     }
 
+    /**
+     * Menampilkan Hasil Pencarian
+     * @param list : Hasil Pencarian
+     */
     @Override
     public void showResults(List<SimplePlace> list)
     {
@@ -132,11 +167,7 @@ public class MainActivity extends AppCompatActivity implements SearchPlaceContra
     @Override
     public boolean onQueryTextChange(String newText)
     {
-        if(newText.length() > 3)
-        {
-            this.presenter.startSearch(newText);
-        }
-        return true;
+        return false;
     }
 
     /**
@@ -160,19 +191,33 @@ public class MainActivity extends AppCompatActivity implements SearchPlaceContra
      */
     public static class SearchPlaceAdapter extends RecyclerView.Adapter<SearchViewHolder>
     {
+        // List data view
         private List<SimplePlace> list;
 
+        /**
+         * Konstruktor
+         */
         SearchPlaceAdapter()
         {
             this.list = new ArrayList();
         }
 
+        /**
+         * Menset List ke View
+         * @param list : list data yg akan ditampilkan
+         */
         public void setList(List<SimplePlace> list)
         {
             this.list.clear();
             this.list.addAll(list);
         }
 
+        /**
+         *
+         * @param parent : view parentnya
+         * @param viewType :
+         * @return view holder cardview (satuan)
+         */
         @NonNull
         @Override
         public SearchViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
@@ -181,6 +226,11 @@ public class MainActivity extends AppCompatActivity implements SearchPlaceContra
             return new SearchViewHolder(view);
         }
 
+        /**
+         *
+         * @param holder : dari atas
+         * @param position : posisi ke- dalam urutan view
+         */
         @Override
         public void onBindViewHolder(@NonNull SearchViewHolder holder, int position)
         {
@@ -199,6 +249,10 @@ public class MainActivity extends AppCompatActivity implements SearchPlaceContra
             }
         }
 
+        /**
+         *
+         * @return jumlah item dalam list
+         */
         @Override
         public int getItemCount()
         {
