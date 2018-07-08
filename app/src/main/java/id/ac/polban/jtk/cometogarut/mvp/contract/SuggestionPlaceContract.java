@@ -46,13 +46,13 @@ public interface SuggestionPlaceContract
     interface Presenter
     {
         /**
-         * Memulai Meload List Ratings dari Network ke Activity
+         * Memulai Meload List Suggestions dari Network ke Activity
          */
-        void startLoadRatings();
+        void startLoadSuggestions(String place_id);
 
         /**
          * Mengirimkan masukkan yang ditulis user
          */
-        void sendReview(Suggestion userSuggestion);
+        void sendSuggestion(Suggestion userSuggestion);
     }
 }

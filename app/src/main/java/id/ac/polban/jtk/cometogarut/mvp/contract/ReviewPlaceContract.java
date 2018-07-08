@@ -46,9 +46,9 @@ public interface ReviewPlaceContract
     interface Presenter
     {
         /**
-         * Memulai Meload List Ratings dari Network ke Activity
+         * Memulai Meload List Reviews dari Network ke Activity
          */
-        void startLoadRatings();
+        void startLoadReviews(String place_id);
 
         /**
          * Mengirimkan review yang ditulis user

@@ -72,7 +72,7 @@ public interface IRestService
      * @return call
      */
     @GET("suggestion/place/{place_id}")
-    Observable<RespList<Review>> getSuggestions(@Path(value = "place_id", encoded = true) String place_id);
+    Observable<RespList<Suggestion>> getSuggestions(@Path(value = "place_id", encoded = true) String place_id);
 
     /**
      * Menginputkan Suggestion ke Web Server

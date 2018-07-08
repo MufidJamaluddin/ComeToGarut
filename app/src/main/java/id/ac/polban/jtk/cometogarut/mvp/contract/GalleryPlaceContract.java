@@ -48,6 +48,6 @@ public interface GalleryPlaceContract
         /**
          * Memulai Meload Gallery dari Network ke Activity
          */
-        void startLoadGalleries();
+        void startLoadGalleries(String place_id);
     }
 }
