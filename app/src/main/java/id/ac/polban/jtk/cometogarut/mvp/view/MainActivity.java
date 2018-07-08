@@ -5,6 +5,7 @@ import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,7 +19,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.pnikosis.materialishprogress.ProgressWheel;
@@ -54,8 +54,14 @@ public class MainActivity extends AppCompatActivity implements SearchPlaceContra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        this.presenter = new SearchPlacePresenter();
-        this.presenter.attach(this);
+        // refresh to load layout                               //
+        // Thanks to https://github.com/francistao/Simple-MVP   //
+        this.swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
+        this.swipeRefreshLayout.setOnRefreshListener(this);
+        // Set the color resources used in the progress animation from color resources.
+        this.swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light, android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
 
         this.progressWheel = findViewById(R.id.progress_wheel);
 
@@ -65,17 +71,11 @@ public class MainActivity extends AppCompatActivity implements SearchPlaceContra
         recycleView.setLayoutManager(new LinearLayoutManager(this));
         recycleView.setAdapter(this.searchPlaceAdapter);
 
+        this.presenter = new SearchPlacePresenter();
+        // ATTACH DULU SEBELUM PRESENTER DIPAKE
+        this.presenter.attach(this);
         // Initialize
         this.presenter.getAll();
-
-        // refresh to load layout
-        // Thanks to https://github.com/francistao/Simple-MVP
-        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
-        swipeRefreshLayout.setOnRefreshListener(this);
-        // Set the color resources used in the progress animation from color resources.
-        swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light, android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
     }
 
     /**
@@ -136,6 +136,7 @@ public class MainActivity extends AppCompatActivity implements SearchPlaceContra
     {
         this.progressWheel.setVisibility(View.GONE);
         this.swipeRefreshLayout.setVisibility(View.VISIBLE);
+        this.swipeRefreshLayout.setRefreshing(false); // tutup refresh animator
 
         ValueAnimator progressFadeInAnim = ObjectAnimator.ofFloat(progressWheel, "alpha", 1, 0, 0);
         progressFadeInAnim.start();
@@ -149,7 +150,8 @@ public class MainActivity extends AppCompatActivity implements SearchPlaceContra
     @Override
     public void showError(String message)
     {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        Snackbar.make(this.swipeRefreshLayout, message, Snackbar.LENGTH_LONG).show();
     }
 
     /**
@@ -216,12 +218,12 @@ public class MainActivity extends AppCompatActivity implements SearchPlaceContra
             if(this.getPlace_id() != null)
             {
                 Intent intent = new Intent(view.getContext(), DetailPlaceActivity.class);
-                intent.putExtra("place_id", this.place_id);
+                intent.putExtra("place_id", this.getPlace_id());
                 view.getContext().startActivity(intent);
             }
         }
 
-        public Integer getPlace_id()
+        Integer getPlace_id()
         {
             return place_id;
         }
