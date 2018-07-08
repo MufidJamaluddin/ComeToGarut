@@ -4,7 +4,6 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.pnikosis.materialishprogress.ProgressWheel;
 
 import java.util.ArrayList;
@@ -67,14 +67,14 @@ public class MainActivity extends AppCompatActivity implements SearchPlaceContra
     /**
      *
      * @param menu : menu toolbar
-     * @return
+     * @return telah diset atau belum
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
         getMenuInflater().inflate(R.menu.search, menu);
         MenuItem menuItem = menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
+        SearchView searchView = (SearchView) menuItem.getActionView();
         searchView.setOnQueryTextListener(this);
         return true;
     }
@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity implements SearchPlaceContra
     /**
      * Class ViewHolder untuk Satuan CardView
      */
-    private static class SearchViewHolder extends RecyclerView.ViewHolder
+    private static class SearchViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
         public TextView titleView;
         public ImageView imageView;
@@ -180,6 +180,12 @@ public class MainActivity extends AppCompatActivity implements SearchPlaceContra
             super(itemView);
             this.titleView = itemView.findViewById(R.id.titleView);
             this.imageView = itemView.findViewById(R.id.imageView);
+        }
+
+        @Override
+        public void onClick(View view)
+        {
+            Toast.makeText(view.getContext(), "Click Pada Posisi ke-" + this.getLayoutPosition(), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -196,14 +202,14 @@ public class MainActivity extends AppCompatActivity implements SearchPlaceContra
          */
         SearchPlaceAdapter()
         {
-            this.list = new ArrayList();
+            this.list = new ArrayList<>();
         }
 
         /**
          * Menset List ke View
          * @param list : list data yg akan ditampilkan
          */
-        public void setList(List<SimplePlace> list)
+        void setList(List<SimplePlace> list)
         {
             this.list.clear();
             this.list.addAll(list);
@@ -243,6 +249,8 @@ public class MainActivity extends AppCompatActivity implements SearchPlaceContra
                 Glide.with(holder.imageView.getContext())
                         .load(place.getLink_photo())
                         .into(holder.imageView);
+
+                holder.imageView.setContentDescription(place.getName());
             }
         }
 

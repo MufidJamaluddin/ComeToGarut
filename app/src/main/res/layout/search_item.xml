@@ -21,17 +21,14 @@
             android:layout_height="wrap_content"
             android:textSize="24sp"
             android:textColor="#1E90FF"
-            android:layout_marginLeft="10dp"
             />
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
-            android:layout_alignParentRight="true"
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
             android:layout_below="@id/titleView"
-            android:layout_margin="10dp"
-            />
+            android:contentDescription="@string/app_name" />
 
     </RelativeLayout>
 
