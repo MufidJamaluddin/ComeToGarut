@@ -2,10 +2,12 @@ package id.ac.polban.jtk.cometogarut.mvp.contract;
 
 import android.app.Application;
 
-import java.util.List;
+import id.ac.polban.jtk.cometogarut.mvp.model.DetailPlace;
 
-import id.ac.polban.jtk.cometogarut.mvp.model.SimplePlace;
-
+/**
+ * Menampilkan Detail Informasi Tempat Wisata
+ * Berdasarkan place_id
+ */
 public interface DetailPlaceContract
 {
     interface View
@@ -17,16 +19,6 @@ public interface DetailPlaceContract
         Application getApplication();
 
         /**
-         * Menampilkan Loading
-         */
-        void showLoading();
-
-        /**
-         * Menyembunyikan Loading
-         */
-        void hideLoading();
-
-        /**
          * Menampilkan pesan error
          * @param message : pesan error
          */
@@ -34,13 +26,13 @@ public interface DetailPlaceContract
 
         /**
          * Menamilkan Hasil Pencarian
-         * @param list : list tempat
+         * @param detailPlace : detail tempat
          */
-        void showResult(SimplePlace simplePlace);
+        void showResult(DetailPlace detailPlace);
 
         /**
          * Mengubah judul Action Bar
-         * @param title
+         * @param title judul
          */
         void showTitle(String title);
     }
@@ -50,6 +42,6 @@ public interface DetailPlaceContract
         /**
          * Memulai Load Data
          */
-        void startLoad();
+        void startLoad(String place_id);
     }
 }

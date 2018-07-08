@@ -2,8 +2,10 @@ package id.ac.polban.jtk.cometogarut.mvp.view;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,7 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.pnikosis.materialishprogress.ProgressWheel;
 
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ import id.ac.polban.jtk.cometogarut.mvp.contract.SearchPlaceContract;
 import id.ac.polban.jtk.cometogarut.mvp.model.SimplePlace;
 import id.ac.polban.jtk.cometogarut.mvp.presenter.SearchPlacePresenter;
 
-public class MainActivity extends AppCompatActivity implements SearchPlaceContract.View, SearchView.OnQueryTextListener
+public class MainActivity extends AppCompatActivity implements SearchPlaceContract.View, SearchView.OnQueryTextListener, SwipeRefreshLayout.OnRefreshListener
 {
     // Presenter yang berhubungan dengan View ini
     private SearchPlacePresenter presenter;
@@ -38,6 +39,10 @@ public class MainActivity extends AppCompatActivity implements SearchPlaceContra
     private ProgressWheel progressWheel;
     // Adapter RecycleView dg List CardView
     private SearchPlaceAdapter searchPlaceAdapter;
+    // Refresh
+    private SwipeRefreshLayout swipeRefreshLayout;
+    // Search Key
+    private String searchKey;
 
     /**
      *
@@ -62,6 +67,15 @@ public class MainActivity extends AppCompatActivity implements SearchPlaceContra
 
         // Initialize
         this.presenter.getAll();
+
+        // refresh to load layout
+        // Thanks to https://github.com/francistao/Simple-MVP
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(this);
+        // Set the color resources used in the progress animation from color resources.
+        swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light, android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
     }
 
     /**
@@ -108,6 +122,7 @@ public class MainActivity extends AppCompatActivity implements SearchPlaceContra
     public void showLoading()
     {
         this.progressWheel.setVisibility(View.VISIBLE);
+        this.swipeRefreshLayout.setVisibility(View.GONE);
         // use objectAnimator let progress from InVisible to Visible
         ValueAnimator progressFadeInAnim = ObjectAnimator.ofFloat(progressWheel, "alpha", 0, 1, 1);
         progressFadeInAnim.start();
@@ -119,7 +134,8 @@ public class MainActivity extends AppCompatActivity implements SearchPlaceContra
     @Override
     public void hideLoading()
     {
-        progressWheel.setVisibility(View.GONE);
+        this.progressWheel.setVisibility(View.GONE);
+        this.swipeRefreshLayout.setVisibility(View.VISIBLE);
 
         ValueAnimator progressFadeInAnim = ObjectAnimator.ofFloat(progressWheel, "alpha", 1, 0, 0);
         progressFadeInAnim.start();
@@ -164,7 +180,17 @@ public class MainActivity extends AppCompatActivity implements SearchPlaceContra
     @Override
     public boolean onQueryTextChange(String newText)
     {
-        return false;
+        this.searchKey = newText;
+        return true;
+    }
+
+    /**
+     * Called when a swipe gesture triggers a refresh.
+     */
+    @Override
+    public void onRefresh()
+    {
+        this.presenter.startSearch(this.searchKey);
     }
 
     /**
@@ -174,6 +200,7 @@ public class MainActivity extends AppCompatActivity implements SearchPlaceContra
     {
         public TextView titleView;
         public ImageView imageView;
+        private Integer place_id;
 
         SearchViewHolder(View itemView)
         {
@@ -186,7 +213,22 @@ public class MainActivity extends AppCompatActivity implements SearchPlaceContra
         @Override
         public void onClick(View view)
         {
-            Toast.makeText(view.getContext(), "Click Pada Posisi ke-" + this.getLayoutPosition(), Toast.LENGTH_LONG).show();
+            if(this.getPlace_id() != null)
+            {
+                Intent intent = new Intent(view.getContext(), DetailPlaceActivity.class);
+                intent.putExtra("place_id", this.place_id);
+                view.getContext().startActivity(intent);
+            }
+        }
+
+        public Integer getPlace_id()
+        {
+            return place_id;
+        }
+
+        public void setPlace_id(Integer place_id)
+        {
+            this.place_id = place_id;
         }
     }
 
@@ -240,6 +282,7 @@ public class MainActivity extends AppCompatActivity implements SearchPlaceContra
         {
             SimplePlace place = list.get(position);
             holder.titleView.setText(place.getName());
+            holder.setPlace_id(place.getId());
 
             if (TextUtils.isEmpty(place.getLink_photo()))
             {

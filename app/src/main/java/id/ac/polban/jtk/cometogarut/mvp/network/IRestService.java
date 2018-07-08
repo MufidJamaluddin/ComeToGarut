@@ -64,7 +64,7 @@ public interface IRestService
      * @return : call
      */
     @POST("review")
-    Observable<Message> saveReview(@Body Review review);
+    Observable<Message> sendReview(@Body Review review);
 
     /**
      * Mendapatkan Suggestion dari Tempat Wisata berdasarkan place_id
@@ -79,6 +79,6 @@ public interface IRestService
      * @return : call
      */
     @POST("suggestion")
-    Observable<Message> saveSuggestion(@Body Suggestion suggestion);
+    Observable<Message> sendSuggestion(@Body Suggestion suggestion);
 
 }

@@ -10,8 +10,6 @@ import id.ac.polban.jtk.cometogarut.mvp.model.SimplePlace;
 import id.ac.polban.jtk.cometogarut.mvp.network.NetworkService;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
-import io.reactivex.Single;
-import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;

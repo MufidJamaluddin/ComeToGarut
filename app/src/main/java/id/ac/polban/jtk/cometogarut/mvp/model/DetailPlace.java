@@ -11,8 +11,9 @@ public class DetailPlace
     private String time_end;
     private String day_end;
     private String description;
-    private String latitude;
-    private String longitude;
+    private String contact;
+    private Float latitude;
+    private Float longitude;
     private String link_photo;
 
     public Integer getId() {
@@ -87,27 +88,35 @@ public class DetailPlace
         this.description = description;
     }
 
-    public String getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
-    }
-
-    public String getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(String longitude) {
-        this.longitude = longitude;
-    }
-
     public String getLink_photo() {
         return link_photo;
     }
 
     public void setLink_photo(String link_photo) {
         this.link_photo = link_photo;
+    }
+
+    public Float getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Float latitude) {
+        this.latitude = latitude;
+    }
+
+    public Float getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Float longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 }

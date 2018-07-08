@@ -1,4 +1,18 @@
 <resources>
     <string name="app_name">ComeToGarut</string>
     <string name="label_search">Cari Tempat Wisata</string>
+
+    <string name="name">Place Name</string>
+    <string name="address">Place Address</string>
+    <string name="price">Place Tickets Price</string>
+    <string name="time_begin">07:00:00</string>
+    <string name="day_begin">Monday</string>
+    <string name="time_end">23:00:00</string>
+    <string name="day_end">Monday</string>
+    <string name="description">Place Description</string>
+    <string name="contact">Contact</string>
+
+    <string name="sh_galleries">Show Galleries</string>
+    <string name="sh_ratings">Show Ratings</string>
+    <string name="sh_suggestions">Show Suggestions</string>
 </resources>

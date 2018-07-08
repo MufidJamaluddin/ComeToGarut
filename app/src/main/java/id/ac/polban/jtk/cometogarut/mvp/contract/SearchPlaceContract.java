@@ -6,6 +6,10 @@ import java.util.List;
 
 import id.ac.polban.jtk.cometogarut.mvp.model.SimplePlace;
 
+/**
+ * Menampilkan Semua / Hasil Pencarian
+ * Tempat Wisata
+ */
 public interface SearchPlaceContract
 {
     interface View
