@@ -3,15 +3,17 @@ package id.ac.polban.jtk.cometogarut.mvp.presenter;
 import android.text.TextUtils;
 import android.util.Log;
 
-import java.util.List;
-
 import id.ac.polban.jtk.cometogarut.mvp.application.CgApplication;
 import id.ac.polban.jtk.cometogarut.mvp.contract.SearchPlaceContract;
+import id.ac.polban.jtk.cometogarut.mvp.model.RespList;
 import id.ac.polban.jtk.cometogarut.mvp.model.SimplePlace;
 import id.ac.polban.jtk.cometogarut.mvp.network.NetworkService;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
+import io.reactivex.Single;
+import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -46,7 +48,7 @@ public class SearchPlacePresenter extends BasePresenter<SearchPlaceContract.View
             this.view.showLoading();
 
             NetworkService restservice = ((CgApplication) this.view.getApplication()).getNetworkService();
-            Observable<List<SimplePlace>> fplaces = restservice.getAPI().getPlaces(searchKey);
+            Observable<RespList<SimplePlace>> fplaces = restservice.getAPI().getPlaces(searchKey);
             this.mergeData(fplaces);
 
             this.view.hideLoading();
@@ -64,7 +66,7 @@ public class SearchPlacePresenter extends BasePresenter<SearchPlaceContract.View
         this.view.showLoading();
 
         NetworkService restservice = ((CgApplication) this.view.getApplication()).getNetworkService();
-        Observable<List<SimplePlace>> fplaces = restservice.getAPI().getPlaces();
+        Observable<RespList<SimplePlace>> fplaces = restservice.getAPI().getPlaces();
         this.mergeData(fplaces);
 
         this.view.hideLoading();
@@ -74,37 +76,39 @@ public class SearchPlacePresenter extends BasePresenter<SearchPlaceContract.View
      *
      * @param fplaces : Flowable
      */
-    private void mergeData(Observable<List<SimplePlace>> fplaces)
+    private void mergeData(Observable<RespList<SimplePlace>> fplaces)
     {
-        Observable<List<SimplePlace>> observable = fplaces.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        Observable<RespList<SimplePlace>> observable = fplaces.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
 
-        observable.subscribe(new Observer<List<SimplePlace>>()
+        observable.subscribe(new Observer<RespList<SimplePlace>>()
         {
             @Override
-            public void onSubscribe(Disposable d)
+            public void onSubscribe(@NonNull Disposable d)
             {
                 compositeDisposable.add(d);
             }
 
             @Override
-            public void onNext(List<SimplePlace> list)
+            public void onNext(@NonNull RespList<SimplePlace> simplePlaceRespList)
             {
-                view.showResults(list);
-                Log.d("SearchPlacePresenter", "Add All Data : onNext...");
+                view.showResults(simplePlaceRespList.getData());
             }
 
             @Override
             public void onError(Throwable e)
             {
-                view.showError(e.getMessage());
-                Log.d("SearchPlacePresenter", e.getMessage());
-                e.printStackTrace();
+                if(e !=  null)
+                {
+                    view.showError(e.getMessage());
+                    Log.d("SearchPlacePresenter", e.getMessage());
+                }
+                Log.d("Mulai error", "heheheegheheheh . . . ");
             }
 
             @Override
             public void onComplete()
             {
-                Log.d("SearchPlacePresenter", "Search Completed...");
+
             }
         });
     }

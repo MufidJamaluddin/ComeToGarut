@@ -56,11 +56,8 @@ public class MainActivity extends AppCompatActivity implements SearchPlaceContra
 
         this.searchPlaceAdapter = new SearchPlaceAdapter();
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-
         RecyclerView recycleView = findViewById(R.id.recyclerView);
-        recycleView.setLayoutManager(layoutManager);
+        recycleView.setLayoutManager(new LinearLayoutManager(this));
         recycleView.setAdapter(this.searchPlaceAdapter);
 
         // Initialize
