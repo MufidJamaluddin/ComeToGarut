@@ -2,14 +2,14 @@
     <string name="app_name">ComeToGarut</string>
     <string name="label_search">Cari Tempat Wisata</string>
 
-    <string name="name">Place Name</string>
-    <string name="address">Place Address</string>
-    <string name="price">Place Tickets Price</string>
+    <string name="name">Place</string>
+    <string name="address">Address</string>
+    <string name="price">Tickets Price</string>
     <string name="time_begin">Open</string>
     <string name="day_begin">Monday</string>
     <string name="time_end">Closed</string>
     <string name="day_end">Monday</string>
-    <string name="description">Place Description</string>
+    <string name="description">Description</string>
     <string name="contact">Contact</string>
 
     <string name="sh_galleries">Show Galleries</string>
