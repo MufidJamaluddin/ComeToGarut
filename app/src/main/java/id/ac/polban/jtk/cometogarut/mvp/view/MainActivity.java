@@ -180,6 +180,7 @@ public class MainActivity extends AppCompatActivity implements SearchPlaceContra
             super(itemView);
             this.titleView = itemView.findViewById(R.id.titleView);
             this.imageView = itemView.findViewById(R.id.imageView);
+            itemView.setOnClickListener(this);
         }
 
         @Override
