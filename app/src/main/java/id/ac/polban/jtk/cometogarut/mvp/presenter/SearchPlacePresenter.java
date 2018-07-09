@@ -37,19 +37,16 @@ public class SearchPlacePresenter extends BasePresenter<SearchPlaceContract.View
     @Override
     public void startSearch(String searchKey)
     {
+        this.view.showLoading();
+
         Log.d("SearchPlacePresenter", "StartSearch...");
 
         if(TextUtils.isEmpty(searchKey))
             this.getAll();
         else {
-            // loading..
-            this.view.showLoading();
-
             NetworkService restservice = ((CgApplication) this.view.getApplication()).getNetworkService();
             Observable<RespList<SimplePlace>> fplaces = restservice.getAPI().getPlaces(searchKey);
             this.mergeData(fplaces);
-
-            this.view.hideLoading();
         }
 
         Log.d("SearchPlacePresenter", "EndSearch...");
@@ -61,13 +58,9 @@ public class SearchPlacePresenter extends BasePresenter<SearchPlaceContract.View
     @Override
     public void getAll()
     {
-        this.view.showLoading();
-
         NetworkService restservice = ((CgApplication) this.view.getApplication()).getNetworkService();
         Observable<RespList<SimplePlace>> fplaces = restservice.getAPI().getPlaces();
         this.mergeData(fplaces);
-
-        this.view.hideLoading();
     }
 
     /**
@@ -106,7 +99,7 @@ public class SearchPlacePresenter extends BasePresenter<SearchPlaceContract.View
             @Override
             public void onComplete()
             {
-
+                view.hideLoading();
             }
         });
     }

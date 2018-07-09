@@ -54,16 +54,19 @@ public class MainActivity extends AppCompatActivity implements SearchPlaceContra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        this.progressWheel = findViewById(R.id.progress_wheel);
+
         // refresh to load layout                               //
         // Thanks to https://github.com/francistao/Simple-MVP   //
         this.swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
+
+        this.showLoading();
+
         this.swipeRefreshLayout.setOnRefreshListener(this);
         // Set the color resources used in the progress animation from color resources.
         this.swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light, android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
-
-        this.progressWheel = findViewById(R.id.progress_wheel);
 
         this.searchPlaceAdapter = new SearchPlaceAdapter();
 
@@ -123,6 +126,7 @@ public class MainActivity extends AppCompatActivity implements SearchPlaceContra
     {
         this.progressWheel.setVisibility(View.VISIBLE);
         this.swipeRefreshLayout.setVisibility(View.GONE);
+        this.progressWheel.spin();
         // use objectAnimator let progress from InVisible to Visible
         ValueAnimator progressFadeInAnim = ObjectAnimator.ofFloat(progressWheel, "alpha", 0, 1, 1);
         progressFadeInAnim.start();
@@ -134,6 +138,7 @@ public class MainActivity extends AppCompatActivity implements SearchPlaceContra
     @Override
     public void hideLoading()
     {
+        this.progressWheel.stopSpinning();
         this.progressWheel.setVisibility(View.GONE);
         this.swipeRefreshLayout.setVisibility(View.VISIBLE);
         this.swipeRefreshLayout.setRefreshing(false); // tutup refresh animator

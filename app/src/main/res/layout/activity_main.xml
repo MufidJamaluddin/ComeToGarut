@@ -9,8 +9,8 @@
 
     <com.pnikosis.materialishprogress.ProgressWheel
         android:id="@+id/progress_wheel"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
         android:layout_gravity="center"
         android:alpha="0"
         wheel:matProg_barColor="#EF5350"
