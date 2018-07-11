@@ -16,6 +16,14 @@
     <string name="open_time">Open Time</string>
     <string name="open_day">Open Day</string>
 
+    <string name="email">Email</string>
+    <string name="send">Send</string>
+
+    <string name="purity">Kebersihan</string>
+    <string name="policy">Ketertiban</string>
+    <string name="security">Keamanan</string>
+    <string name="facility">Fasilitas</string>
+
     <string name="sh_galleries">Galleries</string>
     <string name="sh_ratings">Ratings</string>
     <string name="sh_suggestions">Suggestions</string>
