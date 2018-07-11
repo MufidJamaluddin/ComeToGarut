@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".RatingActivity">
+
+    <ImageView
+        android:id="@+id/photo"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:srcCompat="@android:drawable/btn_star_big_on"
+        android:contentDescription="@string/title" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/title"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:layout_gravity="center"
+        android:textAlignment="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight=".25"
+            android:layout_height="wrap_content"
+            android:text="@string/cleanliness"
+            android:textAppearance="?android:textAppearanceMedium"/>
+
+        <RatingBar
+            android:id="@+id/rating_cleanliness"
+            android:layout_width="0dp"
+            android:layout_weight=".75"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:numStars="5" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight=".25"
+            android:layout_height="wrap_content"
+            android:text="@string/security"
+            android:textAppearance="?android:textAppearanceMedium"/>
+
+        <RatingBar
+            android:id="@+id/rating_security"
+            android:layout_width="0dp"
+            android:layout_weight=".75"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:numStars="5" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight=".25"
+            android:layout_height="wrap_content"
+            android:text="@string/order"
+            android:textAppearance="?android:textAppearanceMedium"/>
+
+        <RatingBar
+            android:id="@+id/rating_orderly"
+            android:layout_width="0dp"
+            android:layout_weight=".75"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:numStars="5" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight=".25"
+            android:layout_height="wrap_content"
+            android:text="@string/facility"
+            android:textAppearance="?android:textAppearanceMedium"/>
+
+        <RatingBar
+            android:id="@+id/rating_facility"
+            android:layout_width="0dp"
+            android:layout_weight=".75"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:numStars="5" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/but"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/send_rev"/>
+
+</LinearLayout>
