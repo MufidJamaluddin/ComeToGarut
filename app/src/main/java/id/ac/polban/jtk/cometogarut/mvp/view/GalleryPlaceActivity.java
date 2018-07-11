@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -53,7 +54,13 @@ public class GalleryPlaceActivity extends AppCompatActivity implements GalleryPl
 
         this.presenter.attach(this);
 
-        final Integer place_id = getIntent().getIntExtra("place_id", 1);
+        Integer place_id = getIntent().getIntExtra("place_id", 1);
+        String title = getIntent().getStringExtra("title");
+
+        ActionBar actionBar = super.getSupportActionBar();
+
+        if(title != null && actionBar != null)
+            actionBar.setTitle(title);
 
         this.galleryPlaceAdaper = new GalleryPlaceAdaper();
 

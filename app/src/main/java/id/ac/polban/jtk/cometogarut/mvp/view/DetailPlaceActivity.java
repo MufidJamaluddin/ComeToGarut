@@ -71,6 +71,7 @@ public class DetailPlaceActivity extends AppCompatActivity implements DetailPlac
             {
                 Intent intent = new Intent(DetailPlaceActivity.this, GalleryPlaceActivity.class);
                 intent.putExtra("place_id", place_id);
+                intent.putExtra("title", actionBar.getTitle());
                 view.getContext().startActivity(intent);
             }
         });

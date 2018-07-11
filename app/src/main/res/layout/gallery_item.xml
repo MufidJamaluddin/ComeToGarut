@@ -13,13 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/titleView"
-            android:contentDescription="@string/app_name" />
-
         <TextView
             android:id="@+id/titleView"
             android:layout_width="match_parent"
@@ -29,6 +22,13 @@
             android:textColor="#1E90FF"
             android:padding="3dp"
             />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/titleView"
+            android:contentDescription="@string/app_name" />
 
     </RelativeLayout>
 
