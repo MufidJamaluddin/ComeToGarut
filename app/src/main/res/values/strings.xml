@@ -13,6 +13,9 @@
     <string name="description">Description</string>
     <string name="contact">Contact</string>
 
+    <string name="open_time">Open Time</string>
+    <string name="open_day">Open Day</string>
+
     <string name="sh_galleries">Galleries</string>
     <string name="sh_ratings">Ratings</string>
     <string name="sh_suggestions">Suggestions</string>

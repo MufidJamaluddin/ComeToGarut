@@ -86,16 +86,16 @@
                 android:layout_width="0dp"
                 android:layout_weight=".30"
                 android:layout_height="wrap_content"
-                android:text="@string/time_begin"
+                android:text="@string/open_day"
                 android:padding="2dp"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
 
             <TextView
-                android:id="@+id/time_beginView"
+                android:id="@+id/opendayView"
                 android:layout_width="0dp"
                 android:layout_weight=".70"
                 android:layout_height="wrap_content"
-                android:text="@string/time_begin"
+                android:text="@string/open_day"
                 android:padding="2dp"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
 
@@ -110,16 +110,16 @@
                 android:layout_width="0dp"
                 android:layout_weight=".30"
                 android:layout_height="wrap_content"
-                android:text="@string/time_end"
+                android:text="@string/open_time"
                 android:padding="2dp"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
 
             <TextView
-                android:id="@+id/time_endView"
+                android:id="@+id/opentimeView"
                 android:layout_width="0dp"
                 android:layout_weight=".70"
                 android:layout_height="wrap_content"
-                android:text="@string/time_end"
+                android:text="@string/open_time"
                 android:padding="2dp"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
 

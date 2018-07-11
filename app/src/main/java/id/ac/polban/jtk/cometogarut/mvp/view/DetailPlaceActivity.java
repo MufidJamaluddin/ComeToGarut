@@ -28,8 +28,8 @@ public class DetailPlaceActivity extends AppCompatActivity implements DetailPlac
     private TextView placeName;
     private TextView placeAddress;
     private TextView placeTicketPrice;
-    private TextView placeTimeBegin;
-    private TextView placeTimeEnd;
+    private TextView placeOpenDay;
+    private TextView placeOpenTime;
     private TextView placeDescription;
     private TextView placeContact;
 
@@ -52,8 +52,9 @@ public class DetailPlaceActivity extends AppCompatActivity implements DetailPlac
         this.placeAddress = super.findViewById(R.id.addressView);
         this.placeTicketPrice = super.findViewById(R.id.priceView);
 
-        this.placeTimeBegin = super.findViewById(R.id.time_beginView);
-        this.placeTimeEnd = super.findViewById(R.id.time_endView);
+        this.placeOpenDay = super.findViewById(R.id.opendayView);
+        this.placeOpenTime = super.findViewById(R.id.opentimeView);
+
         this.placeDescription = super.findViewById(R.id.descriptionView);
         this.placeContact = super.findViewById(R.id.contactView);
 
@@ -114,11 +115,11 @@ public class DetailPlaceActivity extends AppCompatActivity implements DetailPlac
         this.placeContact.setText(detailPlace.getContact());
         this.placeDescription.setText(detailPlace.getDescription());
 
-        String begin = detailPlace.getDay_begin() + " at " + detailPlace.getTime_begin();
-        this.placeTimeBegin.setText(begin);
+        String openDay = detailPlace.getDay_begin() + " s.d " + detailPlace.getDay_end();
+        this.placeOpenDay.setText(openDay);
 
-        String end = detailPlace.getDay_end() + " at " + detailPlace.getTime_end();
-        this.placeTimeEnd.setText(end);
+        String openTime = detailPlace.getTime_begin() + " s.d " + detailPlace.getTime_end();
+        this.placeOpenTime.setText(openTime);
 
         this.placeTicketPrice.setText(detailPlace.getPrice());
         this.placeAddress.setText(detailPlace.getAddress());
