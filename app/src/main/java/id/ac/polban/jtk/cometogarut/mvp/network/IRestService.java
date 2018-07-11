@@ -48,7 +48,7 @@ public interface IRestService
      * @param place_id : id tempat
      * @return call
      */
-    @GET("galery/place/{place_id}")
+    @GET("gallery/place/{place_id}")
     Observable<RespList<Gallery>> getGalleries(@Path(value = "place_id", encoded = true) String place_id);
 
     /**

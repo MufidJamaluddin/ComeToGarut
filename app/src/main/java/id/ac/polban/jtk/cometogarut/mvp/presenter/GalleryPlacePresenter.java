@@ -30,7 +30,7 @@ public class GalleryPlacePresenter extends BasePresenter<GalleryPlaceContract.Vi
     @Override
     public void startLoadGalleries(String place_id)
     {
-        this.view.showLoading();
+    //    this.view.showLoading();
 
         NetworkService restservice = ((CgApplication) this.view.getApplication()).getNetworkService();
         Observable<RespList<Gallery>> galleries = restservice.getAPI().getGalleries(place_id);
@@ -57,12 +57,13 @@ public class GalleryPlacePresenter extends BasePresenter<GalleryPlaceContract.Vi
             }
 
             @Override
-            public void onComplete() {
-
+            public void onComplete()
+            {
+                view.hideLoading();
             }
         });
 
-        this.view.hideLoading();
+      //  this.view.hideLoading();
     }
 
     /**

@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">ComeToGarut</string>
     <string name="label_search">Cari Tempat Wisata</string>
 
@@ -12,7 +13,8 @@
     <string name="description">Description</string>
     <string name="contact">Contact</string>
 
-    <string name="sh_galleries">Show Galleries</string>
-    <string name="sh_ratings">Show Ratings</string>
-    <string name="sh_suggestions">Show Suggestions</string>
+    <string name="sh_galleries">Galleries</string>
+    <string name="sh_ratings">Ratings</string>
+    <string name="sh_suggestions">Suggestions</string>
+
 </resources>

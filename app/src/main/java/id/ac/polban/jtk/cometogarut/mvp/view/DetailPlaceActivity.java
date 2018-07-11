@@ -1,8 +1,11 @@
 package id.ac.polban.jtk.cometogarut.mvp.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +33,9 @@ public class DetailPlaceActivity extends AppCompatActivity implements DetailPlac
     private TextView placeDescription;
     private TextView placeContact;
 
+    // place id
+    private Integer place_id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -51,11 +57,23 @@ public class DetailPlaceActivity extends AppCompatActivity implements DetailPlac
         this.placeDescription = super.findViewById(R.id.descriptionView);
         this.placeContact = super.findViewById(R.id.contactView);
 
-        //Button showGalleries = super.findViewById(R.id.btn_galleries);
+        Button showGalleries = super.findViewById(R.id.btn_galleries);
+
         //Button showSuggestions = super.findViewById(R.id.btn_suggestions);
         //Button showRatings = super.findViewById(R.id.btn_ratings);
 
-        Integer place_id = getIntent().getIntExtra("place_id", 1);
+        this.place_id = getIntent().getIntExtra("place_id", 1);
+
+        showGalleries.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(DetailPlaceActivity.this, GalleryPlaceActivity.class);
+                intent.putExtra("place_id", place_id);
+                view.getContext().startActivity(intent);
+            }
+        });
 
         // initialize
         this.presenter.startLoad(place_id.toString());
