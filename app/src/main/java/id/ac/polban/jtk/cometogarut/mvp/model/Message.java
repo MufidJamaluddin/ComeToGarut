@@ -1,5 +1,9 @@
 package id.ac.polban.jtk.cometogarut.mvp.model;
 
+/**
+ * Class pesan, sesuai dg struktur JSON
+ * @author Mufid Jamaluddin
+ */
 public class Message
 {
     private String status;

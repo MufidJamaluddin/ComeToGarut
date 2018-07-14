@@ -9,6 +9,7 @@ import id.ac.polban.jtk.cometogarut.mvp.model.Gallery;
 /**
  * Menampilkan List Gallery Tempat Wisata
  * Tertentu, Berdasarkan place_id
+ * @author Mufid Jamaluddin
  */
 public interface GalleryPlaceContract
 {

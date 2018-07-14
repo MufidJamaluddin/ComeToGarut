@@ -9,6 +9,7 @@ import id.ac.polban.jtk.cometogarut.mvp.model.Suggestion;
 /**
  * Menampilkan List Masukkan
  * dan Mengirim Masukkan dari User ke Web Server
+ * @author Mufid Jamaluddin
  */
 public interface SuggestionPlaceContract
 {

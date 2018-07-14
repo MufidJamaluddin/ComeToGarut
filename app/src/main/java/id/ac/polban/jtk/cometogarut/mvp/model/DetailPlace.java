@@ -1,5 +1,9 @@
 package id.ac.polban.jtk.cometogarut.mvp.model;
 
+/**
+ * Class DetailPlace sesuai dengan struktur JSON
+ * @author Mufid Jamaluddin
+ */
 public class DetailPlace
 {
     private Integer id;

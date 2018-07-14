@@ -17,6 +17,7 @@ import retrofit2.http.Path;
 
 /**
  * Mengambil Data dari Web Server
+ * @author Mufid Jamaluddin
  */
 public interface IRestService
 {

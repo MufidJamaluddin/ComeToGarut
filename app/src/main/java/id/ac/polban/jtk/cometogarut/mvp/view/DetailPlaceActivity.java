@@ -17,6 +17,10 @@ import id.ac.polban.jtk.cometogarut.mvp.contract.DetailPlaceContract;
 import id.ac.polban.jtk.cometogarut.mvp.model.DetailPlace;
 import id.ac.polban.jtk.cometogarut.mvp.presenter.DetailPlacePresenter;
 
+/**
+ * Activity u/ membuka detail tempat wisata
+ * @author Mufid Jamaluddin
+ */
 public class DetailPlaceActivity extends AppCompatActivity implements DetailPlaceContract.View
 {
     // Presenter

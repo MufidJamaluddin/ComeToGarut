@@ -1,5 +1,9 @@
 package id.ac.polban.jtk.cometogarut.mvp.model;
 
+/**
+ * Class hasil pencarian sesuai dg struktur JSON
+ * @author Mufid Jamaluddin
+ */
 public class SimplePlace
 {
     private Integer id;

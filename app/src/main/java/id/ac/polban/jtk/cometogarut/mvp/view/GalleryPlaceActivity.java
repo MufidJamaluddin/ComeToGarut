@@ -27,6 +27,10 @@ import id.ac.polban.jtk.cometogarut.mvp.contract.GalleryPlaceContract;
 import id.ac.polban.jtk.cometogarut.mvp.model.Gallery;
 import id.ac.polban.jtk.cometogarut.mvp.presenter.GalleryPlacePresenter;
 
+/**
+ * Activity u. list gallery tempat wisata tertentu
+ * @author Mufid Jamaluddin
+ */
 public class GalleryPlaceActivity extends AppCompatActivity implements GalleryPlaceContract.View
 {
     // Presenter yang berhubungan dengan View ini

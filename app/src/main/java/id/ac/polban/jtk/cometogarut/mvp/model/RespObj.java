@@ -3,6 +3,7 @@ package id.ac.polban.jtk.cometogarut.mvp.model;
 /**
  * {"status":"OK","data": {...}}
  * @param <T> : Tipe data
+ *  @author Mufid Jamaluddin
  */
 public class RespObj<T>
 {

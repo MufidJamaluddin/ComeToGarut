@@ -9,6 +9,7 @@ import id.ac.polban.jtk.cometogarut.mvp.model.SimplePlace;
 /**
  * Menampilkan Semua / Hasil Pencarian
  * Tempat Wisata
+ * @author Mufid Jamaluddin
  */
 public interface SearchPlaceContract
 {

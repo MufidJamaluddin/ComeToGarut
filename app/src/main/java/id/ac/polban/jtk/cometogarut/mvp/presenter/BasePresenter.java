@@ -1,5 +1,9 @@
 package id.ac.polban.jtk.cometogarut.mvp.presenter;
 
+/**
+ * @author Mufid Jamaluddin
+ * @param <V>: contract dari view
+ */
 public abstract class BasePresenter<V>
 {
     protected V view;

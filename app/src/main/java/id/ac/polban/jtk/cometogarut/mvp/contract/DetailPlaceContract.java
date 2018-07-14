@@ -7,6 +7,7 @@ import id.ac.polban.jtk.cometogarut.mvp.model.DetailPlace;
 /**
  * Menampilkan Detail Informasi Tempat Wisata
  * Berdasarkan place_id
+ * @author Mufid Jamaluddin
  */
 public interface DetailPlaceContract
 {

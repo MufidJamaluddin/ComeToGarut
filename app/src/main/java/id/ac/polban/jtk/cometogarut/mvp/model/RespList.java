@@ -5,6 +5,7 @@ import java.util.List;
 /**
  * {"status":"OK","data": [{object1}, {object2}...]}
  * @param <T> : Tipe object isi list data
+ * @author Mufid Jamaluddin
  */
 public class RespList<T>
 {

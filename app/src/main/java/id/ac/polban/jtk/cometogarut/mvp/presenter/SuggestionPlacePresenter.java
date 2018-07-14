@@ -13,6 +13,10 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
+/**
+ * Presenter u/ mengirim dan menerima list masukkan/saran pengguna
+ * @author Mufid Jamaluddin
+ */
 public class SuggestionPlacePresenter extends BasePresenter<SuggestionPlaceContract.View> implements SuggestionPlaceContract.Presenter
 {
     private CompositeDisposable compositeDisposable;

@@ -31,6 +31,10 @@ import id.ac.polban.jtk.cometogarut.mvp.contract.SearchPlaceContract;
 import id.ac.polban.jtk.cometogarut.mvp.model.SimplePlace;
 import id.ac.polban.jtk.cometogarut.mvp.presenter.SearchPlacePresenter;
 
+/**
+ * Activity u/ pencarian
+ * @author Mufid Jamaluddin
+ */
 public class MainActivity extends AppCompatActivity implements SearchPlaceContract.View, SearchView.OnQueryTextListener, SwipeRefreshLayout.OnRefreshListener
 {
     // Presenter yang berhubungan dengan View ini

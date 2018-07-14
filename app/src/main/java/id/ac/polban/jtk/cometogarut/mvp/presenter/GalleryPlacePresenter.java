@@ -13,6 +13,10 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
+/**
+ * Presenter u/ mendapatkan Gallery tempat tertentu
+ * @author Mufid Jamaluddin
+ */
 public class GalleryPlacePresenter extends BasePresenter<GalleryPlaceContract.View> implements GalleryPlaceContract.Presenter
 {
     // komposit

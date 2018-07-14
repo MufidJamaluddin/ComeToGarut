@@ -1,5 +1,9 @@
 package id.ac.polban.jtk.cometogarut.mvp.model;
 
+/**
+ * Class Suggestion sesuai dg struktur JSON
+ * @author Mufid Jamaluddin
+ */
 public class Suggestion
 {
     private Integer place_id;

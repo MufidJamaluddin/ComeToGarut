@@ -16,6 +16,10 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
+/**
+ * Presenter u/ menghandle search tempat wisata
+ * @author Mufid Jamaluddin
+ */
 public class SearchPlacePresenter extends BasePresenter<SearchPlaceContract.View> implements SearchPlaceContract.Presenter
 {
     // Koleksi untuk Unsubscribe // kill

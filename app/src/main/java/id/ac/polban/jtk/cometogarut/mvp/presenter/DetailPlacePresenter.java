@@ -13,6 +13,10 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
+/**
+ * Presenter u/ mendapatkan DetailPlace berdasarkan place_id
+ * @author Mufid Jamaluddin
+ */
 public class DetailPlacePresenter extends BasePresenter<DetailPlaceContract.View> implements DetailPlaceContract.Presenter
 {
     // Koleksi untuk Unsubscribe // kill
