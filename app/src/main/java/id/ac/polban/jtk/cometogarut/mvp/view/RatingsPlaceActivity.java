@@ -52,7 +52,7 @@ public class RatingsPlaceActivity extends AppCompatActivity implements RatingsPl
 
         this.progressWheel = findViewById(R.id.progress_wheel);
 
-        this.showLoading();
+        //this.showLoading();
 
         this.presenter = new RatingsPlacePresenter();
 
@@ -67,12 +67,12 @@ public class RatingsPlaceActivity extends AppCompatActivity implements RatingsPl
             actionBar.setTitle(title);
 
         this.RatingsPlaceAdaper = new RatingsPlaceAdaper();
-
+/*
         RecyclerView recycleView = findViewById(R.id.recyclerView);
         recycleView.setLayoutManager(new LinearLayoutManager(this));
         recycleView.setAdapter(this.RatingsPlaceAdaper);
 
-        this.presenter.startLoadGalleries(place_id.toString());
+        this.presenter.startLoadGalleries(place_id.toString());*/
     }
 
     /**
