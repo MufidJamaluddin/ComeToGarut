@@ -19,7 +19,7 @@ import id.ac.polban.jtk.cometogarut.mvp.presenter.DetailPlacePresenter;
 
 /**
  * Activity u/ membuka detail tempat wisata
- * @author Mufid Jamaluddin
+ * @author Mufid Jamaluddin dan Rohmat Dasuki
  */
 public class DetailPlaceActivity extends AppCompatActivity implements DetailPlaceContract.View
 {
@@ -65,10 +65,10 @@ public class DetailPlaceActivity extends AppCompatActivity implements DetailPlac
         Button showGalleries = super.findViewById(R.id.btn_galleries);
 
         //Button showSuggestions = super.findViewById(R.id.btn_suggestions);
-        //Button showRatings = super.findViewById(R.id.btn_ratings);
+        Button showRatings = super.findViewById(R.id.btn_ratings);
 
         this.place_id = getIntent().getIntExtra("place_id", 1);
-
+        // menampilkan galeri pada object yang di pilih
         showGalleries.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -80,7 +80,18 @@ public class DetailPlaceActivity extends AppCompatActivity implements DetailPlac
                 view.getContext().startActivity(intent);
             }
         });
-
+        //menampilkan rating untuk object yang di pilih
+        showRatings.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(DetailPlaceActivity.this, RatingsPlaceActivity.class);
+                intent.putExtra("place_id", place_id);
+                intent.putExtra("title", actionBar.getTitle());
+                view.getContext().startActivity(intent);
+            }
+        });
         // initialize
         this.presenter.startLoad(place_id.toString());
     }

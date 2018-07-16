@@ -1,8 +1,7 @@
 package id.ac.polban.jtk.cometogarut.mvp.presenter;
-
 import id.ac.polban.jtk.cometogarut.mvp.application.CgApplication;
-import id.ac.polban.jtk.cometogarut.mvp.contract.GalleryPlaceContract;
-import id.ac.polban.jtk.cometogarut.mvp.model.Gallery;
+import id.ac.polban.jtk.cometogarut.mvp.contract.RatingsPlaceContract;
+import id.ac.polban.jtk.cometogarut.mvp.model.Review;
 import id.ac.polban.jtk.cometogarut.mvp.model.RespList;
 import id.ac.polban.jtk.cometogarut.mvp.network.NetworkService;
 import io.reactivex.Observable;
@@ -14,33 +13,33 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Presenter u/ mendapatkan Gallery tempat tertentu
- * @author Mufid Jamaluddin
+ * Created by rohmatdasuki on 7/15/2018.
  */
-public class    GalleryPlacePresenter extends BasePresenter<GalleryPlaceContract.View> implements GalleryPlaceContract.Presenter
+
+public class RatingsPlacePresenter extends BasePresenter<RatingsPlaceContract.View> implements RatingsPlaceContract.Presenter
 {
     // komposit
     private CompositeDisposable compositeDisposable;
 
     // Konstruktor
-    public GalleryPlacePresenter()
+    public RatingsPlacePresenter()
     {
         this.compositeDisposable = new CompositeDisposable();
     }
 
     /**
-     * Memulai Meload Gallery dari Network ke Activity
+     * Memulai Meload Ratings dari Network ke Activity
      */
-    @Override
+@Override
     public void startLoadGalleries(String place_id)
     {
-    //    this.view.showLoading();
+       //  this.view.showLoading();
 
         NetworkService restservice = ((CgApplication) this.view.getApplication()).getNetworkService();
-        Observable<RespList<Gallery>> galleries = restservice.getAPI().getGalleries(place_id);
+        Observable<RespList<Review>> Ratings = restservice.getAPI().getReviews(place_id);
 
-        Observable<RespList<Gallery>> respListObservable = galleries.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
-        respListObservable.subscribe(new Observer<RespList<Gallery>>()
+        Observable<RespList<Review>> respListObservable = Ratings.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        respListObservable.subscribe(new Observer<RespList<Review>>()
         {
             @Override
             public void onSubscribe(Disposable d)
@@ -49,9 +48,9 @@ public class    GalleryPlacePresenter extends BasePresenter<GalleryPlaceContract
             }
 
             @Override
-            public void onNext(@NonNull RespList<Gallery> galleryRespList)
+            public void onNext(@NonNull RespList<Review> RatingsRespList)
             {
-                view.showResults(galleryRespList.getData());
+                view.showResults(RatingsRespList.getData());
             }
 
             @Override
@@ -67,7 +66,7 @@ public class    GalleryPlacePresenter extends BasePresenter<GalleryPlaceContract
             }
         });
 
-      //  this.view.hideLoading();
+        //  this.view.hideLoading();
     }
 
     /**

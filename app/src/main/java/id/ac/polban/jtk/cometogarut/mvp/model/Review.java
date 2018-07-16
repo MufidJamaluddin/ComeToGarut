@@ -15,6 +15,7 @@ public class Review
     private String policy_rate;
     private String security_rate;
     private String facility_rate;
+    private String link_photo;
 
     public String getPlace_id() {
         return place_id;
@@ -87,4 +88,13 @@ public class Review
     public void setFacility_rate(String facility_rate) {
         this.facility_rate = facility_rate;
     }
+
+    public String getLink_photo() {
+        return link_photo;
+    }
+
+    public void setLink_photo(String link_photo) {
+        this.link_photo = link_photo;
+    }
+
 }
