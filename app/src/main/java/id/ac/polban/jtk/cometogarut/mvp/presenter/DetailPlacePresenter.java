@@ -78,7 +78,7 @@ public class DetailPlacePresenter extends BasePresenter<DetailPlaceContract.View
             @Override
             public void onComplete()
             {
-
+                view.hideLoading();
             }
         });
     }

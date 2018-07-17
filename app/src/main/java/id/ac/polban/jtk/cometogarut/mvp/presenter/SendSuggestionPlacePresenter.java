@@ -1,42 +1,44 @@
 package id.ac.polban.jtk.cometogarut.mvp.presenter;
 
 import id.ac.polban.jtk.cometogarut.mvp.application.CgApplication;
-import id.ac.polban.jtk.cometogarut.mvp.contract.SuggestionPlaceContract;
-import id.ac.polban.jtk.cometogarut.mvp.model.RespList;
+import id.ac.polban.jtk.cometogarut.mvp.contract.SendSuggestionPlaceContract;
+import id.ac.polban.jtk.cometogarut.mvp.model.Message;
 import id.ac.polban.jtk.cometogarut.mvp.model.Suggestion;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Presenter u/ mengirim dan menerima list masukkan/saran pengguna
+ * Presenter u/ mengirim
  * @author Mufid Jamaluddin
  */
-public class SuggestionPlacePresenter extends BasePresenter<SuggestionPlaceContract.View> implements SuggestionPlaceContract.Presenter
+public class SendSuggestionPlacePresenter extends BasePresenter<SendSuggestionPlaceContract.View> implements SendSuggestionPlaceContract.Presenter
 {
     private CompositeDisposable compositeDisposable;
 
-    public SuggestionPlacePresenter()
+    public SendSuggestionPlacePresenter()
     {
         this.compositeDisposable = new CompositeDisposable();
     }
 
     /**
-     * Memulai Meload List Ratings dari Network ke Activity
+     * Mengirimkan masukkan yang ditulis user
+     *
+     * @param userSuggestion;
      */
     @Override
-    public void startLoadSuggestions(String place_id)
+    public void sendSuggestion(Suggestion userSuggestion)
     {
         this.view.showLoading();
 
-        Observable<RespList<Suggestion>> suggestions = ((CgApplication) this.view.getApplication())
-                .getNetworkService().getAPI().getSuggestions(place_id);
+        Observable<Message> messageObservable = ((CgApplication) this.view.getApplication())
+                .getNetworkService().getAPI().sendSuggestion(userSuggestion);
 
-        suggestions.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<RespList<Suggestion>>() {
+        messageObservable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<Message>()
+        {
             @Override
             public void onSubscribe(Disposable d)
             {
@@ -44,13 +46,13 @@ public class SuggestionPlacePresenter extends BasePresenter<SuggestionPlaceContr
             }
 
             @Override
-            public void onNext(@NonNull RespList<Suggestion> reviewRespList)
+            public void onNext(Message message)
             {
-                view.showResults(reviewRespList.getData());
+                view.showMessage(message.getMessages());
             }
 
             @Override
-            public void onError(@NonNull Throwable e)
+            public void onError(Throwable e)
             {
                 view.showMessage(e.getMessage());
             }
@@ -58,11 +60,9 @@ public class SuggestionPlacePresenter extends BasePresenter<SuggestionPlaceContr
             @Override
             public void onComplete()
             {
-
+                view.hideLoading();
             }
         });
-
-        this.view.hideLoading();
     }
 
     /**

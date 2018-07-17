@@ -27,5 +27,12 @@
     <string name="sh_galleries">Galleries</string>
     <string name="sh_ratings">Ratings</string>
     <string name="sh_suggestions">Suggestions</string>
+    <string name="send_suggestions">Send Suggestions</string>
+    <string name="sh_review">Review</string>
+    <string name="send_review">Send Review</string>
+
+    <string name="title_detail">Deskripsi</string>
+
+    <string name="title_activity_detail">Detail Place</string>
 
 </resources>

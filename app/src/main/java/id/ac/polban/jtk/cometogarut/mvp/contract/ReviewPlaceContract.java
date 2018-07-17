@@ -7,8 +7,7 @@ import java.util.List;
 import id.ac.polban.jtk.cometogarut.mvp.model.Review;
 
 /**
- * Menampilkan list review (max 5 terbaru)
- * Mengirimkan review dari User
+ * Menampilkan list review
  * @author Mufid Jamaluddin
  */
 public interface ReviewPlaceContract

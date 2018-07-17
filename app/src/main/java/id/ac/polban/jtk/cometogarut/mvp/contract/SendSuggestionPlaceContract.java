@@ -2,15 +2,13 @@ package id.ac.polban.jtk.cometogarut.mvp.contract;
 
 import android.app.Application;
 
-import java.util.List;
-
 import id.ac.polban.jtk.cometogarut.mvp.model.Suggestion;
 
 /**
- * Menampilkan List Masukkan
+ * Mengirim Masukkan dari User ke Web Server
  * @author Mufid Jamaluddin
  */
-public interface SuggestionPlaceContract
+public interface SendSuggestionPlaceContract
 {
     interface View
     {
@@ -36,18 +34,13 @@ public interface SuggestionPlaceContract
          */
         void showMessage(String message);
 
-        /**
-         * Menampilkan Semua Saran dari User
-         */
-        void showResults(List<Suggestion> list);
-
     }
 
     interface Presenter
     {
         /**
-         * Memulai Meload List Suggestions dari Network ke Activity
+         * Mengirimkan masukkan yang ditulis user
          */
-        void startLoadSuggestions(String place_id);
+        void sendSuggestion(Suggestion userSuggestion);
     }
 }

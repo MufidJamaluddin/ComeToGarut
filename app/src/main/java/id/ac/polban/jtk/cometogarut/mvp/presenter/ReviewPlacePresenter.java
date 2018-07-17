@@ -58,11 +58,9 @@ public class ReviewPlacePresenter extends BasePresenter<ReviewPlaceContract.View
 
             @Override
             public void onComplete() {
-
+                view.hideLoading();
             }
         });
-
-        this.view.hideLoading();
     }
 
     /**

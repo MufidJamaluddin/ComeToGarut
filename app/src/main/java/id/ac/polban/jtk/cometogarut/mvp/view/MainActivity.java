@@ -226,7 +226,7 @@ public class MainActivity extends AppCompatActivity implements SearchPlaceContra
         {
             if(this.getPlace_id() != null)
             {
-                Intent intent = new Intent(view.getContext(), DetailPlaceActivity.class);
+                Intent intent = new Intent(view.getContext(), DetailActivity.class);
                 intent.putExtra("place_id", this.getPlace_id());
                 view.getContext().startActivity(intent);
             }

@@ -1,11 +1,9 @@
 package id.ac.polban.jtk.cometogarut.mvp.view;
 
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -17,7 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.pnikosis.materialishprogress.ProgressWheel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,12 +28,10 @@ import id.ac.polban.jtk.cometogarut.mvp.presenter.GalleryPlacePresenter;
  * Activity u. list gallery tempat wisata tertentu
  * @author Mufid Jamaluddin
  */
-public class GalleryPlaceActivity extends AppCompatActivity implements GalleryPlaceContract.View
+public class GalleryPlaceFragment extends BaseFragment implements GalleryPlaceContract.View
 {
     // Presenter yang berhubungan dengan View ini
     private GalleryPlacePresenter presenter;
-    // Progress....
-    private ProgressWheel progressWheel;
     // Adapter RecycleView dg List CardView
     private GalleryPlaceAdaper galleryPlaceAdaper;
 
@@ -44,71 +39,37 @@ public class GalleryPlaceActivity extends AppCompatActivity implements GalleryPl
      * Dipanggil ketika activity dijalankan
      * @param savedInstanceState : instance state
      */
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState)
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-        super.onCreate(savedInstanceState);
-        super.setContentView(R.layout.activity_gallery_place);
-
-        this.progressWheel = findViewById(R.id.progress_wheel);
-
         this.showLoading();
 
         this.presenter = new GalleryPlacePresenter();
 
         this.presenter.attach(this);
 
-        Integer place_id = getIntent().getIntExtra("place_id", 1);
-        String title = getIntent().getStringExtra("title");
-
-        ActionBar actionBar = super.getSupportActionBar();
-
-        if(title != null && actionBar != null)
-            actionBar.setTitle(title);
+        View view = inflater.inflate(R.layout.activity_gallery_place, container, false);
 
         this.galleryPlaceAdaper = new GalleryPlaceAdaper();
 
-        RecyclerView recycleView = findViewById(R.id.recyclerView);
-        recycleView.setLayoutManager(new LinearLayoutManager(this));
+        RecyclerView recycleView = view.findViewById(R.id.recyclerView);
+        recycleView.setLayoutManager(new LinearLayoutManager(super.getContext()));
         recycleView.setAdapter(this.galleryPlaceAdaper);
 
-        this.presenter.startLoadGalleries(place_id.toString());
+        this.presenter.startLoadGalleries(super.getPlaceId().toString());
+
+        return view;
     }
 
     /**
      * Dipanggil ketika activity di-kill
      */
     @Override
-    protected void onDestroy()
+    public void onDestroyView()
     {
         this.presenter.detach();
-        super.onDestroy();
-    }
-
-    /**
-     * Menampilkan Loading
-     */
-    @Override
-    public void showLoading()
-    {
-        this.progressWheel.setVisibility(View.VISIBLE);
-        this.progressWheel.spin();
-
-        ValueAnimator progressFadeInAnim = ObjectAnimator.ofFloat(progressWheel, "alpha", 0, 1, 1);
-        progressFadeInAnim.start();
-    }
-
-    /**
-     * Menyembunyikan Loading
-     */
-    @Override
-    public void hideLoading()
-    {
-        this.progressWheel.stopSpinning();
-        this.progressWheel.setVisibility(View.GONE);
-
-        ValueAnimator progressFadeInAnim = ObjectAnimator.ofFloat(progressWheel, "alpha", 1, 0, 0);
-        progressFadeInAnim.start();
+        super.onDestroyView();
     }
 
     /**
@@ -119,8 +80,8 @@ public class GalleryPlaceActivity extends AppCompatActivity implements GalleryPl
     @Override
     public void showError(String message)
     {
-        /* Snackbar.make(this, message, Snackbar.LENGTH_LONG).show(); */
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        if(this.getView() != null)
+            Snackbar.make(this.getView(), message, Snackbar.LENGTH_LONG).show();
     }
 
     /**

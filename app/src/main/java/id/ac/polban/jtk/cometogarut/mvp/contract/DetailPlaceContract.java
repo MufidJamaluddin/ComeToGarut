@@ -32,10 +32,20 @@ public interface DetailPlaceContract
         void showResult(DetailPlace detailPlace);
 
         /**
-         * Mengubah judul Action Bar
+         *
          * @param title judul
          */
         void showTitle(String title);
+
+        /**
+         * Menyembunyikan Loading
+         */
+        void hideLoading();
+
+        /**
+         * Menampilkan Loading
+         */
+        void showLoading();
     }
 
     interface Presenter
@@ -44,5 +54,7 @@ public interface DetailPlaceContract
          * Memulai Load Data
          */
         void startLoad(String place_id);
+
+
     }
 }

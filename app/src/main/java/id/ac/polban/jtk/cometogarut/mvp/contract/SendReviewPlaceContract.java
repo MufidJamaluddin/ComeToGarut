@@ -2,16 +2,14 @@ package id.ac.polban.jtk.cometogarut.mvp.contract;
 
 import android.app.Application;
 
-import java.util.List;
-
 import id.ac.polban.jtk.cometogarut.mvp.model.Review;
 
 /**
- * Created by rohmatdasuki on 7/14/2018.
+ * Mengirimkan review dari User
+ * @author Mufid Jamaluddin
  */
-
-public interface RatingsPlaceContract {
-
+public interface SendReviewPlaceContract
+{
     interface View
     {
         /**
@@ -31,23 +29,17 @@ public interface RatingsPlaceContract {
         void hideLoading();
 
         /**
-         * Menampilkan pesan error
-         * @param message : pesan error
+         * Menampilkan pesan
+         * @param message : pesan yg akan ditampilkan, bisa error atau sukses
          */
-        void showError(String message);
-
-        /**
-         * Menampilkan Hasil Pencarian
-         */
-        void showResults(List<Review> list);
-
+        void showMessage(String message);
     }
 
     interface Presenter
     {
         /**
-         * Memulai Meload Ratings dari Network ke Activity
+         * Mengirimkan review yang ditulis user
          */
-        void startLoadGalleries(String place_id);
+        void sendReview(Review userReview);
     }
 }
