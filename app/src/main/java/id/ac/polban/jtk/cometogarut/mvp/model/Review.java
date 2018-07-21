@@ -1,5 +1,7 @@
 package id.ac.polban.jtk.cometogarut.mvp.model;
 
+import android.text.TextUtils;
+
 /**
  * Class Review sesuai dg struktur JSON
  * @author Mufid Jamaluddin
@@ -33,7 +35,11 @@ public class Review
         this.id = id;
     }
 
-    public String getName() {
+    public String getName()
+    {
+        if(name == null)
+            return "";
+
         return name;
     }
 
@@ -41,7 +47,11 @@ public class Review
         this.name = name;
     }
 
-    public String getEmail() {
+    public String getEmail()
+    {
+        if(email == null)
+            return "";
+
         return email;
     }
 
@@ -49,23 +59,32 @@ public class Review
         this.email = email;
     }
 
-    public String getMessage() {
+    public String getMessage()
+    {
+        if(message == null) return "";
+
         return message;
     }
 
-    public void setMessage(String message) {
+    public void setMessage(String message)
+    {
         this.message = message;
     }
 
-    public String getPurity_rate() {
+    public String getPurity_rate()
+    {
+        if(TextUtils.isEmpty(purity_rate)) return "0";
         return purity_rate;
     }
 
-    public void setPurity_rate(String purity_rate) {
+    public void setPurity_rate(String purity_rate)
+    {
         this.purity_rate = purity_rate;
     }
 
-    public String getPolicy_rate() {
+    public String getPolicy_rate()
+    {
+        if(TextUtils.isEmpty(policy_rate)) return "0";
         return policy_rate;
     }
 
@@ -73,7 +92,9 @@ public class Review
         this.policy_rate = policy_rate;
     }
 
-    public String getSecurity_rate() {
+    public String getSecurity_rate()
+    {
+        if(TextUtils.isEmpty(security_rate)) return "0";
         return security_rate;
     }
 
@@ -81,7 +102,9 @@ public class Review
         this.security_rate = security_rate;
     }
 
-    public String getFacility_rate() {
+    public String getFacility_rate()
+    {
+        if(TextUtils.isEmpty(facility_rate)) return "0";
         return facility_rate;
     }
 

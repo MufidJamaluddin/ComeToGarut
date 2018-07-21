@@ -49,10 +49,5 @@ public interface ReviewPlaceContract
          * Memulai Meload List Reviews dari Network ke Activity
          */
         void startLoadReviews(String place_id);
-
-        /**
-         * Mengirimkan review yang ditulis user
-         */
-        void sendReview(Review userReview);
     }
 }

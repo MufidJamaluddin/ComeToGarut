@@ -17,6 +17,7 @@ import id.ac.polban.jtk.cometogarut.mvp.presenter.SendReviewPlacePresenter;
 
 /**
  * Fragment untuk mengirimkan Review User
+ * @author Mufid Jamaluddin
  */
 public class SendReviewFragment extends BaseFragment implements SendReviewPlaceContract.View
 {

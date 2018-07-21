@@ -5,15 +5,14 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.pnikosis.materialishprogress.ProgressWheel;
@@ -24,6 +23,7 @@ import id.ac.polban.jtk.cometogarut.R;
 
 /**
  * Melayani Detail Wisata : Induk Fragment
+ * @author Mufid Jamaluddin
  */
 public class DetailActivity extends AppCompatActivity implements BaseFragmentActivity
 {
@@ -31,7 +31,6 @@ public class DetailActivity extends AppCompatActivity implements BaseFragmentAct
     private ActionBar actionBar;
 
     private ViewPager viewPager;
-    private AppBarLayout appBarLayout;
 
     private Integer place_id;
 
@@ -42,7 +41,7 @@ public class DetailActivity extends AppCompatActivity implements BaseFragmentAct
         setContentView(R.layout.activity_detail);
 
         this.progressWheel = findViewById(R.id.progress_wheel);
-        this.appBarLayout = findViewById(R.id.appbar);
+//        AppBarLayout appBarLayout = findViewById(R.id.appbar);
         this.viewPager = findViewById(R.id.pager);
 
         this.actionBar = super.getSupportActionBar();
@@ -80,7 +79,7 @@ public class DetailActivity extends AppCompatActivity implements BaseFragmentAct
     @Override
     public void showLoading()
     {
-        this.appBarLayout.setVisibility(View.GONE);
+        //this.appBarLayout.setVisibility(View.GONE);
         this.viewPager.setVisibility(View.GONE);
 
         this.progressWheel.setVisibility(View.VISIBLE);
@@ -99,7 +98,7 @@ public class DetailActivity extends AppCompatActivity implements BaseFragmentAct
         this.progressWheel.stopSpinning();
         this.progressWheel.setVisibility(View.GONE);
 
-        this.appBarLayout.setVisibility(View.VISIBLE);
+        //this.appBarLayout.setVisibility(View.VISIBLE);
         this.viewPager.setVisibility(View.VISIBLE);
 
         ValueAnimator progressFadeInAnim = ObjectAnimator.ofFloat(progressWheel, "alpha", 1, 0, 0);
@@ -121,14 +120,25 @@ public class DetailActivity extends AppCompatActivity implements BaseFragmentAct
      */
     private static class SectionsPageAdapter extends FragmentPagerAdapter
     {
+        // konteks ini
         private WeakReference<Context> refContext;
 
+        /**
+         * Konstruktor
+         * @param context konteks
+         * @param fm fragment manager
+         */
         SectionsPageAdapter(Context context, FragmentManager fm)
         {
             super(fm);
             this.refContext = new WeakReference<>(context);
         }
 
+        /**
+         *
+         * @param position posisi fragmenr
+         * @return instance fragment
+         */
         @Override
         public Fragment getItem(int position)
         {
@@ -150,6 +160,11 @@ public class DetailActivity extends AppCompatActivity implements BaseFragmentAct
             return null;
         }
 
+        /**
+         *
+         * @param position posisi fragment
+         * @return judul fragment
+         */
         @Nullable
         @Override
         public CharSequence getPageTitle(int position)

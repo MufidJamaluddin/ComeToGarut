@@ -17,6 +17,7 @@ import id.ac.polban.jtk.cometogarut.mvp.presenter.SendSuggestionPlacePresenter;
 
 /**
  * Fragment untuk Mengirimkan Masukkan/Saran (SUGGESTION)
+ * @author Mufid Jamaluddin
  */
 public class SendSuggestionFragment extends BaseFragment implements SendSuggestionPlaceContract.View
 {

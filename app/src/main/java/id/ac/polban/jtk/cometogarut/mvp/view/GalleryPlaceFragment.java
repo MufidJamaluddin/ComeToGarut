@@ -43,7 +43,7 @@ public class GalleryPlaceFragment extends BaseFragment implements GalleryPlaceCo
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-        this.showLoading();
+        //this.showLoading();
 
         this.presenter = new GalleryPlacePresenter();
 

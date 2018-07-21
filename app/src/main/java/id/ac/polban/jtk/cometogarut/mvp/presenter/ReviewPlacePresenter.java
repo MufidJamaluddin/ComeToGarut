@@ -64,48 +64,6 @@ public class ReviewPlacePresenter extends BasePresenter<ReviewPlaceContract.View
     }
 
     /**
-     * Mengirimkan review yang ditulis user
-     *
-     * @param userReview : data
-     */
-    @Override
-    public void sendReview(Review userReview)
-    {
-        this.view.showLoading();
-
-        Observable<Message> messageObservable = ((CgApplication) this.view.getApplication())
-                .getNetworkService().getAPI().sendReview(userReview);
-
-        messageObservable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<Message>() {
-            @Override
-            public void onSubscribe(Disposable d)
-            {
-                compositeDisposable.add(d);
-            }
-
-            @Override
-            public void onNext(Message message)
-            {
-                view.showMessage(message.getMessages());
-            }
-
-            @Override
-            public void onError(Throwable e)
-            {
-                view.showMessage(e.getMessage());
-            }
-
-            @Override
-            public void onComplete()
-            {
-
-            }
-        });
-
-        this.view.hideLoading();
-    }
-
-    /**
      * Melakukan unbinding View di Presenter
      */
     @Override

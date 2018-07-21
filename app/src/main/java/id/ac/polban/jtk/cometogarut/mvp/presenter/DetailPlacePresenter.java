@@ -46,6 +46,8 @@ public class DetailPlacePresenter extends BasePresenter<DetailPlaceContract.View
     @Override
     public void startLoad(String place_id)
     {
+        this.view.showLoading();
+
         NetworkService restservice = ((CgApplication) this.view.getApplication()).getNetworkService();
         Observable<RespObj<DetailPlace>> detailplace = restservice.getAPI().getPlace(place_id);
 

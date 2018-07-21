@@ -58,11 +58,9 @@ public class SuggestionPlacePresenter extends BasePresenter<SuggestionPlaceContr
             @Override
             public void onComplete()
             {
-
+                view.hideLoading();
             }
         });
-
-        this.view.hideLoading();
     }
 
     /**
