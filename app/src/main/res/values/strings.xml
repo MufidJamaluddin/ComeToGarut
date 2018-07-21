@@ -1,5 +1,5 @@
 <resources>
-
+// rohmat dan mufid
     <string name="app_name">ComeToGarut</string>
     <string name="label_search">Cari Tempat Wisata</string>
     <string name="masukan">Masukan</string>
