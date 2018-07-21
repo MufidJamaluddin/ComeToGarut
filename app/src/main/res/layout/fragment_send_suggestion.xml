@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    android:orientation="vertical">
+    android:orientation="vertical">'
 
     <TextView
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight=".30"
-            android:text="@string/app_name"
+            android:text="@string/masukan"
             android:textAppearance="?android:textAppearanceMedium" />
 
         <EditText
@@ -31,7 +31,7 @@
             android:layout_weight=".70"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:hint="@string/app_name"/>
+            android:hint="@string/masukan"/>
 
     </LinearLayout>
 

@@ -2,6 +2,7 @@
 
     <string name="app_name">ComeToGarut</string>
     <string name="label_search">Cari Tempat Wisata</string>
+    <string name="masukan">Masukan</string>
 
     <string name="name">Place</string>
     <string name="address">Address</string>
@@ -35,4 +36,7 @@
 
     <string name="title_activity_detail">Detail Place</string>
 
+    <string name="title_form">Title Form</string>
+    <string name="nama">Nama</string>
+    <string name="send_rev">Send</string>
 </resources>
