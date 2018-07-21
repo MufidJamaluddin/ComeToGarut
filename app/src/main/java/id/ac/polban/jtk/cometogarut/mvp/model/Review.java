@@ -1,7 +1,5 @@
 package id.ac.polban.jtk.cometogarut.mvp.model;
 
-import android.text.TextUtils;
-
 /**
  * Class Review sesuai dg struktur JSON
  * @author Mufid Jamaluddin
@@ -17,7 +15,7 @@ public class Review
     private String policy_rate;
     private String security_rate;
     private String facility_rate;
-    private String link_photo;
+
 
     public String getPlace_id() {
         return place_id;
@@ -35,11 +33,7 @@ public class Review
         this.id = id;
     }
 
-    public String getName()
-    {
-        if(name == null)
-            return "";
-
+    public String getName() {
         return name;
     }
 
@@ -47,11 +41,7 @@ public class Review
         this.name = name;
     }
 
-    public String getEmail()
-    {
-        if(email == null)
-            return "";
-
+    public String getEmail() {
         return email;
     }
 
@@ -59,32 +49,23 @@ public class Review
         this.email = email;
     }
 
-    public String getMessage()
-    {
-        if(message == null) return "";
-
+    public String getMessage() {
         return message;
     }
 
-    public void setMessage(String message)
-    {
+    public void setMessage(String message) {
         this.message = message;
     }
 
-    public String getPurity_rate()
-    {
-        if(TextUtils.isEmpty(purity_rate)) return "0";
+    public String getPurity_rate() {
         return purity_rate;
     }
 
-    public void setPurity_rate(String purity_rate)
-    {
+    public void setPurity_rate(String purity_rate) {
         this.purity_rate = purity_rate;
     }
 
-    public String getPolicy_rate()
-    {
-        if(TextUtils.isEmpty(policy_rate)) return "0";
+    public String getPolicy_rate() {
         return policy_rate;
     }
 
@@ -92,9 +73,7 @@ public class Review
         this.policy_rate = policy_rate;
     }
 
-    public String getSecurity_rate()
-    {
-        if(TextUtils.isEmpty(security_rate)) return "0";
+    public String getSecurity_rate() {
         return security_rate;
     }
 
@@ -102,22 +81,11 @@ public class Review
         this.security_rate = security_rate;
     }
 
-    public String getFacility_rate()
-    {
-        if(TextUtils.isEmpty(facility_rate)) return "0";
+    public String getFacility_rate() {
         return facility_rate;
     }
 
     public void setFacility_rate(String facility_rate) {
         this.facility_rate = facility_rate;
     }
-
-    public String getLink_photo() {
-        return link_photo;
-    }
-
-    public void setLink_photo(String link_photo) {
-        this.link_photo = link_photo;
-    }
-
 }

@@ -103,7 +103,7 @@ public class ReviewFragment extends BaseFragment implements ReviewPlaceContract.
     {
         TextView userName;
         TextView userEmail;
-        TextView userMessage;
+//        TextView userMessage;
 
         RatingBar ratingCleanliness;
         RatingBar ratingSecurity;
@@ -116,7 +116,7 @@ public class ReviewFragment extends BaseFragment implements ReviewPlaceContract.
 
             this.userName = itemView.findViewById(R.id.user_name);
             this.userEmail = itemView.findViewById(R.id.user_email);
-            this.userMessage = itemView.findViewById(R.id.user_description);
+//            this.userMessage = itemView.findViewById(R.id.user_description);
 
             this.ratingCleanliness = itemView.findViewById(R.id.rating_cleanliness);
             this.ratingSecurity = itemView.findViewById(R.id.rating_security);
@@ -185,7 +185,7 @@ public class ReviewFragment extends BaseFragment implements ReviewPlaceContract.
 
             holder.userName.setText(review.getName());
             holder.userEmail.setText(review.getEmail());
-            holder.userMessage.setText(review.getMessage());
+    //        holder.userMessage.setText(review.getMessage());
 
             holder.ratingFacility.setRating(Float.valueOf(review.getFacility_rate()));
             holder.ratingOrderly.setRating(Float.valueOf(review.getPolicy_rate()));
