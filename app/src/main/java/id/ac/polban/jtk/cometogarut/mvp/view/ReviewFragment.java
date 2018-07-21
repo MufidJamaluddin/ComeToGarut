@@ -110,9 +110,13 @@ public class ReviewFragment extends BaseFragment implements ReviewPlaceContract.
         RatingBar ratingOrderly;
         RatingBar ratingFacility;
 
+        View itemView;
+
         ReviewViewHolder(View itemView)
         {
             super(itemView);
+
+            this.itemView = itemView;
 
             this.userName = itemView.findViewById(R.id.user_name);
             this.userEmail = itemView.findViewById(R.id.user_email);
@@ -187,10 +191,17 @@ public class ReviewFragment extends BaseFragment implements ReviewPlaceContract.
             holder.userEmail.setText(review.getEmail());
     //        holder.userMessage.setText(review.getMessage());
 
-            holder.ratingFacility.setRating(Float.valueOf(review.getFacility_rate()));
-            holder.ratingOrderly.setRating(Float.valueOf(review.getPolicy_rate()));
-            holder.ratingSecurity.setRating(Float.valueOf(review.getSecurity_rate()));
-            holder.ratingCleanliness.setRating(Float.valueOf(review.getPurity_rate()));
+            try 
+            {
+                holder.ratingFacility.setRating(Float.valueOf(String.valueOf(review.getFacility_rate())));
+                holder.ratingOrderly.setRating(Float.valueOf(String.valueOf(review.getPolicy_rate())));
+                holder.ratingSecurity.setRating(Float.valueOf(String.valueOf(review.getSecurity_rate())));
+                holder.ratingCleanliness.setRating(Float.valueOf(String.valueOf(review.getPurity_rate())));
+            }
+            catch (NumberFormatException e)
+            {
+                Snackbar.make(holder.itemView, e.getMessage(), Snackbar.LENGTH_LONG).show();
+            }
         }
 
         /**
