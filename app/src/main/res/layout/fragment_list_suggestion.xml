@@ -1,65 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".mvp.view.SuggestionFragment">
 
- <LinearLayout
-     android:layout_width="match_parent"
-     android:layout_height="match_parent"
-     android:orientation="vertical">
-     <TextView
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:text="@string/app_name"
-         android:textAppearance="?android:textAppearanceLarge"
-         android:textAlignment="center"/>
-
-     <LinearLayout
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:orientation="horizontal">
-
-         <TextView
-             android:layout_width="0dp"
+         <LinearLayout
+             android:layout_width="match_parent"
              android:layout_height="wrap_content"
-             android:layout_weight=".30"
-             android:text="@string/masukan"
-             android:textAppearance="?android:textAppearanceMedium" />
+             android:orientation="horizontal">
 
-         <TextView
-             android:id="@+id/name"
-             android:layout_width="0dp"
-             android:layout_weight=".70"
+             <TextView
+                 android:layout_width="0dp"
+                 android:layout_height="wrap_content"
+                 android:layout_weight=".30"
+                 android:text="@string/name"
+                 android:textAppearance="?android:textAppearanceMedium" />
+
+             <EditText
+                 android:id="@+id/user_name"
+                 android:layout_width="0dp"
+                 android:layout_weight=".70"
+                 android:layout_height="wrap_content"
+                 android:inputType="text"
+                 android:hint="@string/nama"
+                 />
+
+         </LinearLayout>
+
+         <LinearLayout
+             android:layout_width="match_parent"
              android:layout_height="wrap_content"
-             android:inputType="text"
-             />
+             android:orientation="horizontal">
 
-     </LinearLayout>
+             <TextView
+                 android:layout_width="0dp"
+                 android:layout_weight=".30"
+                 android:layout_height="wrap_content"
+                 android:text="@string/email"
+                 android:textAppearance="?android:textAppearanceMedium" />
 
-     <LinearLayout
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:orientation="horizontal">
+             <EditText
+                 android:id="@+id/user_email"
+                 android:layout_width="0dp"
+                 android:layout_weight=".70"
+                 android:layout_height="wrap_content"
+                 android:inputType="textEmailAddress"
+                 android:hint="@string/email"
+                />
 
-         <TextView
-             android:layout_width="0dp"
-             android:layout_weight=".30"
+         </LinearLayout>
+
+         <LinearLayout
+             android:layout_width="match_parent"
              android:layout_height="wrap_content"
-             android:text="@string/email"
-             android:textAppearance="?android:textAppearanceMedium" />
+             android:orientation="horizontal">
 
-         <TextView
-             android:id="@+id/email"
-             android:layout_width="0dp"
-             android:layout_weight=".70"
-             android:layout_height="wrap_content"
-             android:inputType="textEmailAddress"
-            />
+             <TextView
+                 android:layout_width="0dp"
+                 android:layout_weight=".30"
+                 android:layout_height="wrap_content"
+                 android:text="@string/description"
+                 android:textAppearance="?android:textAppearanceMedium" />
 
-     </LinearLayout>
+             <EditText
+                 android:id="@+id/user_description"
+                 android:layout_width="0dp"
+                 android:layout_weight=".70"
+                 android:layout_height="wrap_content"
+                 android:inputType="text"
+                 android:hint="@string/description"
+                 />
 
- </LinearLayout>
+         </LinearLayout>
 
-</FrameLayout>
+</LinearLayout>
