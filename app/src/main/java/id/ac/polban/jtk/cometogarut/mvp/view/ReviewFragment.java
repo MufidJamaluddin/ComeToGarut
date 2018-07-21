@@ -191,16 +191,16 @@ public class ReviewFragment extends BaseFragment implements ReviewPlaceContract.
             holder.userEmail.setText(review.getEmail());
     //        holder.userMessage.setText(review.getMessage());
 
-            try 
+            try
             {
-                holder.ratingFacility.setRating(Float.valueOf(String.valueOf(review.getFacility_rate())));
-                holder.ratingOrderly.setRating(Float.valueOf(String.valueOf(review.getPolicy_rate())));
-                holder.ratingSecurity.setRating(Float.valueOf(String.valueOf(review.getSecurity_rate())));
-                holder.ratingCleanliness.setRating(Float.valueOf(String.valueOf(review.getPurity_rate())));
+                holder.ratingFacility.setRating(Float.parseFloat(String.valueOf(review.getFacility_rate())));
+                holder.ratingOrderly.setRating(Float.parseFloat(String.valueOf(review.getPolicy_rate())));
+                holder.ratingSecurity.setRating(Float.parseFloat(String.valueOf(review.getSecurity_rate())));
+                holder.ratingCleanliness.setRating(Float.parseFloat(String.valueOf(review.getPurity_rate())));
             }
-            catch (NumberFormatException e)
+            catch (Exception e)
             {
-                Snackbar.make(holder.itemView, e.getMessage(), Snackbar.LENGTH_LONG).show();
+                Snackbar.make(holder.itemView, "Error Parse : " + e.getMessage(), Snackbar.LENGTH_LONG).show();
             }
         }
 

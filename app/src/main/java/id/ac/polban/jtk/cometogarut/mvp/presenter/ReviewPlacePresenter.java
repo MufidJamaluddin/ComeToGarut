@@ -37,7 +37,7 @@ public class ReviewPlacePresenter extends BasePresenter<ReviewPlaceContract.View
         Observable<RespList<Review>> reviews = ((CgApplication) this.view.getApplication())
                 .getNetworkService().getAPI().getReviews(place_id);
 
-        reviews.observeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<RespList<Review>>() {
+        reviews.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<RespList<Review>>() {
             @Override
             public void onSubscribe(Disposable d)
             {
@@ -53,7 +53,7 @@ public class ReviewPlacePresenter extends BasePresenter<ReviewPlaceContract.View
             @Override
             public void onError(@NonNull Throwable e)
             {
-                view.showMessage(e.getMessage());
+                view.showMessage("Error Load : " + e.getMessage());
             }
 
             @Override
