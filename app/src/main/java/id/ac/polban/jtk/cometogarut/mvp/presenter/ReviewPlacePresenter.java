@@ -32,7 +32,7 @@ public class ReviewPlacePresenter extends BasePresenter<ReviewPlaceContract.View
     @Override
     public void startLoadReviews(String place_id)
     {
-        this.view.showLoading();
+    //    this.view.showLoading();
 
         Observable<RespList<Review>> reviews = ((CgApplication) this.view.getApplication())
                 .getNetworkService().getAPI().getReviews(place_id);
