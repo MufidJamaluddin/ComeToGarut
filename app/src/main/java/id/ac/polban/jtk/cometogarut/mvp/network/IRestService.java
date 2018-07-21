@@ -64,7 +64,7 @@ public interface IRestService
      * Menginputkan Review ke Database
      * @return : call
      */
-    @POST("review")
+    @POST("review/index.php")
     Observable<Message> sendReview(@Body Review review);
 
     /**
@@ -79,7 +79,7 @@ public interface IRestService
      * Menginputkan Suggestion ke Web Server
      * @return : call
      */
-    @POST("suggestion")
+    @POST("suggestion/index.php")
     Observable<Message> sendSuggestion(@Body Suggestion suggestion);
 
 }
